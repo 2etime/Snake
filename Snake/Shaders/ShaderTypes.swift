@@ -40,6 +40,7 @@ struct ModelConstants: sizeable {
 }
 
 struct GridConstants: sizeable {
+    var totalGameTime: Float = 1.0
     var cellsWide: Float = 1.0
     var cellsHigh: Float = 1.0
 };

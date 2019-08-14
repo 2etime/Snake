@@ -19,6 +19,9 @@ class GameHandler: NSObject, MTKViewDelegate {
         let commandBuffer = Engine.CommandQueue.makeCommandBuffer()
         let renderCommandEncoder = commandBuffer?.makeRenderCommandEncoder(descriptor: view.currentRenderPassDescriptor!)
         
+        let deltaTime: Float = 1 / Float(view.preferredFramesPerSecond)
+        grid.update(deltaTime: deltaTime)
+        
         renderCommandEncoder?.setVertexBytes(&sceneConstants, length: SceneConstants.stride, index: 1)
         grid.render(renderCommandEncoder!)
         

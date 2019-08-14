@@ -12,19 +12,19 @@ struct RasterizerData {
 };
 
 struct SceneConstants {
-    float4x4 projectionMatrix;
-};
+    float4x4 projectionMatrix;};
 
 struct ModelConstants {
     float4x4 modelMatrix;
 };
 
 struct GridConstants {
+    float totalGameTime;
     float cellsWide;
     float cellsHigh;
 };
 
-vertex RasterizerData grid_vertex_shader(Vertex vIn [[ stage_in ]],
+vertex RasterizerData basic_vertex_shader(Vertex vIn [[ stage_in ]],
                                          constant SceneConstants &sceneConstants [[ buffer(1) ]],
                                          constant ModelConstants &modelConstants [[ buffer(2) ]]) {
     RasterizerData rd;
@@ -81,10 +81,12 @@ fragment half4 grid_fragment_shader(RasterizerData rd [[ stage_in ]],
 
     float2 texCoord = rd.textureCoordinate;
     
+    float4 bc = abs(float4(texCoord.x,texCoord.y,abs(sin(gridConstants.totalGameTime)), 1.0));
+    
     float2 cellCounts = float2(gridConstants.cellsWide,gridConstants.cellsHigh);
     float lineWidth = 0.06;
-    float4 borderColor = float4(1,0,0,0);
-    float4 gridColor = float4(1,1,1,1);
+    float4 borderColor = bc;
+    float4 gridColor = float4(1,0,1,1);
     float4 backgroundColor = float4(0,0,0,1);
     float4 color = grid(cellCounts,
                         lineWidth,

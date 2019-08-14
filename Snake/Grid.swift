@@ -37,7 +37,7 @@ class Grid {
     }
     
     private func buildRenderPipelineState() {
-        let vertexFunction = Engine.DefaultLibrary.makeFunction(name: "grid_vertex_shader")
+        let vertexFunction = Engine.DefaultLibrary.makeFunction(name: "basic_vertex_shader")
         let fragmentFunction = Engine.DefaultLibrary.makeFunction(name: "grid_fragment_shader")
         
         let vertexDescriptor = MTLVertexDescriptor()
@@ -68,7 +68,7 @@ class Grid {
     }
     
     public func update(deltaTime: Float) {
-        // TODO: Update grid if need be
+        self._gridConstants.totalGameTime += deltaTime
     }
     
     public func render(_ renderCommandEncoder: MTLRenderCommandEncoder) {
