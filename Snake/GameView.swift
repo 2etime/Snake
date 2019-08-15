@@ -14,9 +14,9 @@ class GameView: MTKView {
         
         self.gameHandler = GameHandler(view: self)
         
-        self.clearColor = EngineSettings.ClearColor
+        self.clearColor = GameSettings.ClearColor
         
-        self.colorPixelFormat = EngineSettings.MainPixelFormat
+        self.colorPixelFormat = GameSettings.MainPixelFormat
         
         self.delegate = gameHandler
     }
