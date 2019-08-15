@@ -104,6 +104,14 @@ fragment half4 snake_fragment_shader(RasterizerData rd [[ stage_in ]]) {
     return half4(color.r, color.g, color.b, color.a);
 }
 
+fragment half4 apple_fragment_shader(RasterizerData rd [[ stage_in ]],
+                                     texture2d<float> texture [[ texture(0) ]],
+                                     sampler sampler2d [[ sampler(0) ]]) {
+    float4 color = texture.sample(sampler2d, rd.textureCoordinate);
+    
+    return half4(color.r, color.g, color.b, color.a);
+}
+
 
 
 

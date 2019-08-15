@@ -1,6 +1,6 @@
 import MetalKit
 
-class Mesh {
+class SquareMesh {
     private var _vertices: [Vertex] = []
     private var _indices: [UInt32] = []
     

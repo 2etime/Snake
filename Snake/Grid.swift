@@ -5,11 +5,11 @@ class Grid: Node {
     private var _modelConstants = ModelConstants()
     private var _gridConstants = GridConstants()
     
-    private var _mesh: Mesh!
+    private var _mesh: SquareMesh!
     
     override init() {
         super.init()
-        _mesh = Mesh()
+        _mesh = SquareMesh()
         
         let scale = float3(GameSettings.GridCellsWide,
                            GameSettings.GridCellsHigh, 1.0)

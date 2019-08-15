@@ -11,8 +11,12 @@ class Scene: Node {
                                                             near: -1.0, far: 1.0)
         sceneConstants.projectionMatrix = projectionMatrix
         
+
         addChild(Grid())
-        addChild(Snake(posX: 2, posY: 2))
+        addChild(Apple(posX: Float(Int.random(in: 0..<Int(GameSettings.GridCellsWide - 1))),
+                       posY: Float(Int.random(in: 0..<Int(GameSettings.GridCellsHigh - 1)))))
+        
+        addChild(Snake())
     }
     
     override func render(_ renderCommandEncoder: MTLRenderCommandEncoder) {

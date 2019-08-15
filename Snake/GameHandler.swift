@@ -8,6 +8,10 @@ class GameHandler: NSObject, MTKViewDelegate {
         
         RenderPipelineStates.Initialize()
         
+        SamplerStates.Initialize()
+        
+        Textures.Initialize()
+        
         updateScreenSize(view: view)
         
         scene = Scene()

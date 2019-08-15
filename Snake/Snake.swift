@@ -1,11 +1,11 @@
 import MetalKit
 
-class Snake: Node {
-    private var _mesh: Mesh!
+class Body: Node {
+    private var _mesh: SquareMesh!
     private var _modelConstants = ModelConstants()
     private var _nextDirection = float2(0,0)
     
-    private var _speed: Float = 8.0
+    private var _speed: Float = 1.0
     private var _velocity: float2 = float2(1,0)
     
     var timePassed: Float = 1
@@ -21,8 +21,8 @@ class Snake: Node {
     init(posX: Float, posY: Float) {
         super.init()
         
-        self._mesh = Mesh()
-
+        self._mesh = SquareMesh()
+        
         self.position = float3(posX - floor(GameSettings.GridCellsWide / 2) + 1,
                                -posY + floor(GameSettings.GridCellsHigh / 2) - 1,
                                0.0)
@@ -65,4 +65,15 @@ class Snake: Node {
         renderCommandEncoder.setVertexBytes(&_modelConstants, length: ModelConstants.stride, index: 2)
         _mesh.draw(renderCommandEncoder)
     }
+}
+
+class Snake: Node {
+
+    override init() {
+        super.init()
+        
+        let startingPos = float2(0,0)
+        self.addChild(Body(posX: startingPos.x, posY: startingPos.y))
+    }
+    
 }
