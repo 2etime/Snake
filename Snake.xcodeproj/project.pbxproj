@@ -19,6 +19,10 @@
 		C602404F2303B54100807C8B /* Grid.swift in Sources */ = {isa = PBXBuildFile; fileRef = C602404E2303B54100807C8B /* Grid.swift */; };
 		C60240522303B6E100807C8B /* Shaders.metal in Sources */ = {isa = PBXBuildFile; fileRef = C60240512303B6E100807C8B /* Shaders.metal */; };
 		C60240542303B6F100807C8B /* ShaderTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = C60240532303B6F100807C8B /* ShaderTypes.swift */; };
+		C6F03DCF2304D57200FE1A07 /* Snake.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6F03DCE2304D57200FE1A07 /* Snake.swift */; };
+		C6F03DD42304DAA900FE1A07 /* KeyCodes.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6F03DD12304DAA900FE1A07 /* KeyCodes.swift */; };
+		C6F03DD52304DAA900FE1A07 /* Mouse.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6F03DD22304DAA900FE1A07 /* Mouse.swift */; };
+		C6F03DD62304DAA900FE1A07 /* Keyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6F03DD32304DAA900FE1A07 /* Keyboard.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,6 +41,10 @@
 		C602404E2303B54100807C8B /* Grid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Grid.swift; sourceTree = "<group>"; };
 		C60240512303B6E100807C8B /* Shaders.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = Shaders.metal; sourceTree = "<group>"; };
 		C60240532303B6F100807C8B /* ShaderTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShaderTypes.swift; sourceTree = "<group>"; };
+		C6F03DCE2304D57200FE1A07 /* Snake.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Snake.swift; sourceTree = "<group>"; };
+		C6F03DD12304DAA900FE1A07 /* KeyCodes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyCodes.swift; sourceTree = "<group>"; };
+		C6F03DD22304DAA900FE1A07 /* Mouse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Mouse.swift; sourceTree = "<group>"; };
+		C6F03DD32304DAA900FE1A07 /* Keyboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Keyboard.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,8 +82,10 @@
 				C60240432303B13C00807C8B /* GameView.swift */,
 				C60240452303B25000807C8B /* GameHandler.swift */,
 				C602404E2303B54100807C8B /* Grid.swift */,
+				C6F03DCE2304D57200FE1A07 /* Snake.swift */,
 				C60240502303B6D200807C8B /* Shaders */,
 				C602404D2303B4E500807C8B /* Utils */,
+				C6F03DD02304DAA900FE1A07 /* input */,
 				C60240422303B10600807C8B /* OtherFiles */,
 			);
 			path = Snake;
@@ -109,6 +119,16 @@
 				C60240512303B6E100807C8B /* Shaders.metal */,
 			);
 			path = Shaders;
+			sourceTree = "<group>";
+		};
+		C6F03DD02304DAA900FE1A07 /* input */ = {
+			isa = PBXGroup;
+			children = (
+				C6F03DD12304DAA900FE1A07 /* KeyCodes.swift */,
+				C6F03DD22304DAA900FE1A07 /* Mouse.swift */,
+				C6F03DD32304DAA900FE1A07 /* Keyboard.swift */,
+			);
+			path = input;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -181,6 +201,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C6F03DD52304DAA900FE1A07 /* Mouse.swift in Sources */,
+				C6F03DD42304DAA900FE1A07 /* KeyCodes.swift in Sources */,
+				C6F03DD62304DAA900FE1A07 /* Keyboard.swift in Sources */,
 				C60240462303B25000807C8B /* GameHandler.swift in Sources */,
 				C60240352303B0FD00807C8B /* Snake.xcdatamodeld in Sources */,
 				C602404A2303B34D00807C8B /* EngineSettings.swift in Sources */,
@@ -190,6 +213,7 @@
 				C60240542303B6F100807C8B /* ShaderTypes.swift in Sources */,
 				C60240522303B6E100807C8B /* Shaders.metal in Sources */,
 				C60240302303B0FD00807C8B /* AppDelegate.swift in Sources */,
+				C6F03DCF2304D57200FE1A07 /* Snake.swift in Sources */,
 				C60240482303B27200807C8B /* Engine.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -82,7 +82,6 @@ fragment half4 grid_fragment_shader(RasterizerData rd [[ stage_in ]],
     float2 texCoord = rd.textureCoordinate;
     
     float4 bc = abs(float4(texCoord.x,texCoord.y,abs(sin(gridConstants.totalGameTime)), 1.0));
-    
     float2 cellCounts = float2(gridConstants.cellsWide,gridConstants.cellsHigh);
     float lineWidth = 0.06;
     float4 borderColor = bc;
@@ -98,5 +97,13 @@ fragment half4 grid_fragment_shader(RasterizerData rd [[ stage_in ]],
     
     return half4(color.r, color.g, color.b, color.a);
 }
+
+fragment half4 snake_fragment_shader(RasterizerData rd [[ stage_in ]]) {
+    float4 color = float4(1,0,0,1);
+    
+    return half4(color.r, color.g, color.b, color.a);
+}
+
+
 
 

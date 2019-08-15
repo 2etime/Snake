@@ -1,7 +1,7 @@
 
 import MetalKit
 
-class Grid {
+class Snake {
     private var _vertices: [Vertex] = []
     private var _indices: [UInt32] = []
     
@@ -11,17 +11,39 @@ class Grid {
     private var _renderPipelineState: MTLRenderPipelineState!
     
     private var _modelConstants = ModelConstants()
-    private var _gridConstants = GridConstants()
     
-    init(cellsWide: Float, cellsHigh: Float) {
+    private var _speed: Float = 8.0
+    private var _velocity: float2 = float2(1,0)
+    
+    private var _position: float3 = float3(0,0,0)
+    private var _rotation: float3 = float3(0,0,0)
+    private var _scale: float3 = float3(1,1,1)
+    var modelMatrix: matrix_float4x4 {
+        var modelMatrix = matrix_identity_float4x4
+        modelMatrix.translate(self._position)
+        modelMatrix.rotate(angle: self._rotation.x, axis: X_AXIS)
+        modelMatrix.rotate(angle: self._rotation.y, axis: Y_AXIS)
+        modelMatrix.rotate(angle: self._rotation.z, axis: Z_AXIS)
+        modelMatrix.scale(self._scale)
+        return modelMatrix
+    }
+    
+    var timePassed: Float = 1
+    var shouldTick: Bool {
+        if(timePassed.truncatingRemainder(dividingBy: floor(60 / _speed)) == 0) {
+            timePassed = 1
+            return true
+        }
+        timePassed += 1
+        return false
+    }
+    
+    init(posX: Float, posY: Float) {
         buildMesh()
         buildRenderPipelineState()
         
-        let scale = float3(cellsWide, cellsHigh, 1.0)
-        _modelConstants.modelMatrix.scale(scale)
-        
-        _gridConstants.cellsWide = cellsWide
-        _gridConstants.cellsHigh = cellsHigh
+        self._position = float3(posX - floor(CellsWide / 2) + 1, -posY + floor(CellsWide / 2) - 1, 0.0)
+        self._scale = float3(0.90, 0.90, 1.0)
     }
     
     private func buildMesh() {
@@ -38,7 +60,7 @@ class Grid {
     
     private func buildRenderPipelineState() {
         let vertexFunction = Engine.DefaultLibrary.makeFunction(name: "basic_vertex_shader")
-        let fragmentFunction = Engine.DefaultLibrary.makeFunction(name: "grid_fragment_shader")
+        let fragmentFunction = Engine.DefaultLibrary.makeFunction(name: "snake_fragment_shader")
         
         let vertexDescriptor = MTLVertexDescriptor()
         
@@ -51,7 +73,7 @@ class Grid {
         vertexDescriptor.attributes[1].format = .float2
         vertexDescriptor.attributes[1].bufferIndex = 0
         vertexDescriptor.attributes[1].offset = float3.size
-
+        
         vertexDescriptor.layouts[0].stride = Vertex.stride
         
         let renderPipelineDescriptor = MTLRenderPipelineDescriptor()
@@ -67,15 +89,27 @@ class Grid {
         }
     }
     
+    private func updateConstants() {
+        
+    }
+    
     public func update(deltaTime: Float) {
-        self._gridConstants.totalGameTime += deltaTime
+        if(shouldTick) {
+            _velocity = NextDirection
+        }else{
+            _velocity = float2(0,0)
+        }
+        
+        self._position.x += self._velocity.x
+        self._position.y += self._velocity.y
+        
+        _modelConstants.modelMatrix = modelMatrix
     }
     
     public func render(_ renderCommandEncoder: MTLRenderCommandEncoder) {
         renderCommandEncoder.setRenderPipelineState(self._renderPipelineState)
         renderCommandEncoder.setVertexBuffer(_vertexBuffer, offset: 0, index: 0)
         renderCommandEncoder.setVertexBytes(&_modelConstants, length: ModelConstants.stride, index: 2)
-        renderCommandEncoder.setFragmentBytes(&_gridConstants, length: GridConstants.stride, index: 1)
         renderCommandEncoder.drawIndexedPrimitives(type: .triangle,
                                                    indexCount: self._indices.count,
                                                    indexType: .uint32,
