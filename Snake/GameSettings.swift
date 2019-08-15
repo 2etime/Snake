@@ -12,5 +12,7 @@ class GameSettings {
     
     public static var GridCellsWide: Float = 41.0
     public static var GridCellsHigh: Float = 41.0
+    
+    public static var SnakeSpeed: Float = 20.0
 }
 
