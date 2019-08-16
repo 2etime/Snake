@@ -14,7 +14,7 @@ class GameHandler: NSObject, MTKViewDelegate {
         
         updateScreenSize(view: view)
         
-        scene = Scene()
+        scene = GameScene()
     }
     
     public func updateScreenSize(view: MTKView){

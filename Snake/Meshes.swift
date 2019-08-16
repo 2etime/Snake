@@ -1,6 +1,6 @@
 import MetalKit
 
-class SquareMesh {
+class Mesh {
     private var _vertices: [Vertex] = []
     private var _indices: [UInt32] = []
     
@@ -8,17 +8,21 @@ class SquareMesh {
     private var _indexBuffer: MTLBuffer!
     
     init() {
-        buildMesh()
+        getVertices()
+        self._indices = getIndices()
+        buildBuffers()
     }
     
-    private func buildMesh() {
-        self._vertices.append(Vertex(position: float3( 0.5, 0.5, 0), textureCoordinate: float2(1,0))) // Top Right
-        self._vertices.append(Vertex(position: float3(-0.5, 0.5, 0), textureCoordinate: float2(0,0))) // Top Left
-        self._vertices.append(Vertex(position: float3(-0.5,-0.5, 0), textureCoordinate: float2(0,1))) // Bottom Left
-        self._vertices.append(Vertex(position: float3( 0.5,-0.5, 0), textureCoordinate: float2(1,1))) // Bottom Right
-        
-        self._indices.append(contentsOf: [ 0,1,2,    0,2,3 ])
-        
+    func addVertex(position: float3,
+                   textureCoordinate: float2) {
+        self._vertices.append(Vertex(position: position, textureCoordinate: textureCoordinate))
+    }
+    
+    func getVertices() {  }
+    
+    func getIndices()->[UInt32] { return [] }
+    
+    func buildBuffers() {
         self._vertexBuffer = Engine.Device.makeBuffer(bytes: self._vertices, length: Vertex.stride(self._vertices.count), options: [])
         self._indexBuffer = Engine.Device.makeBuffer(bytes: self._indices, length: UInt32.stride(self._indices.count), options: [])
     }
@@ -31,4 +35,20 @@ class SquareMesh {
                                                    indexBuffer: self._indexBuffer,
                                                    indexBufferOffset: 0)
     }
+    
+}
+
+class SquareMesh: Mesh {
+  
+    override func getVertices() {
+        addVertex(position: float3( 0.5, 0.5, 0), textureCoordinate: float2(1,0)) // Top Right
+        addVertex(position: float3(-0.5, 0.5, 0), textureCoordinate: float2(0,0)) // Top Left
+        addVertex(position: float3(-0.5,-0.5, 0), textureCoordinate: float2(0,1)) // Bottom Left
+        addVertex(position: float3( 0.5,-0.5, 0), textureCoordinate: float2(1,1)) // Bottom Right
+    }
+    
+    override func getIndices() -> [UInt32] {
+        return [ 0,1,2,    0,2,3 ]
+    }
+
 }

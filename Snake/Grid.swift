@@ -1,33 +1,58 @@
 
 import MetalKit
 
-class Grid: Node {
-    private var _modelConstants = ModelConstants()
-    private var _gridConstants = GridConstants()
-    
+class Grid: GameObject {
+    override var renderPipelineStateType: RenderPipelineStateTypes { return .GridBackground }
+    private var _totalTime: Float = 0.0
     private var _mesh: SquareMesh!
     
-    override init() {
-        super.init()
+    init() {
+        super.init(mesh: SquareMesh())
         _mesh = SquareMesh()
         
         let scale = float3(GameSettings.GridCellsWide,
                            GameSettings.GridCellsHigh, 1.0)
-        _modelConstants.modelMatrix.scale(scale)
+        self.setScale(scale)
+        
+        addChild(GridLines())
+    }
+    
+    override func doUpdate(deltaTime: Float) {
+        _totalTime += deltaTime
+    }
+    
+    override func render(_ renderCommandEncoder: MTLRenderCommandEncoder) {
+        renderCommandEncoder.setFragmentBytes(&_totalTime, length: Float.stride, index: 0)
+        super.render(renderCommandEncoder)
+    }
+}
+
+class GridLines: GameObject {
+    private var _gridConstants = GridConstants()
+    override var renderPipelineStateType: RenderPipelineStateTypes { return .Grid }
+    
+    private var _mesh: SquareMesh!
+    
+    init() {
+        super.init(mesh: SquareMesh())
+        _mesh = SquareMesh()
+        
+        var scale = float3(GameSettings.GridCellsWide,
+                           GameSettings.GridCellsHigh, 1.0)
+        
+        scale *= (1 - GameSettings.GridLinesWidth) // scale to match border
+        self.setScale(scale)
         
         _gridConstants.cellsWide = GameSettings.GridCellsWide
         _gridConstants.cellsHigh = GameSettings.GridCellsHigh
     }
     
-    override func update(deltaTime: Float) {
+    override func doUpdate(deltaTime: Float) {
         self._gridConstants.totalGameTime += deltaTime
     }
     
     override func render(_ renderCommandEncoder: MTLRenderCommandEncoder) {
-        renderCommandEncoder.setRenderPipelineState(RenderPipelineStates.get(.Grid))
-        renderCommandEncoder.setVertexBytes(&_modelConstants, length: ModelConstants.stride, index: 2)
         renderCommandEncoder.setFragmentBytes(&_gridConstants, length: GridConstants.stride, index: 1)
-        
-        _mesh.draw(renderCommandEncoder)
+        super.render(renderCommandEncoder)
     }
 }
