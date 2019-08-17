@@ -16,7 +16,6 @@ class Snake: Node {
     public var head: SnakeSection { return self._head}
     private var _nextDirection: float3 = float3(1,0,0)
     private var _turns: [String: float3] = [:]
-    var canAdd: Bool = false
     var turnsToRemove: [String] = []
     override init() {
         super.init()
@@ -80,7 +79,9 @@ class Snake: Node {
         }
     }
     
+    var gridPositions: [String: SnakeSection] = [:]
     override func doUpdate(deltaTime: Float) {
+        gridPositions.removeAll()
         
         if(Keyboard.IsKeyPressed(.space)) {
             addSection()
@@ -94,20 +95,17 @@ class Snake: Node {
                 
                 for (i, child) in children.enumerated() {
                     if let section = child as? SnakeSection {
-                        if(_turns["\(section.gridPositionString)"] != nil) {
-                            let turn  = _turns["\(section.gridPositionString)"]!
+                        let key = "\(section.gridPositionString)"
+                        if(_turns[key] != nil) {
+                            let turn  = _turns[key]!
                             section.setTurn(direction: turn)
                             if(i == children.count - 1) {
-                                _turns.removeValue(forKey: "\(section.gridPositionString)")
+                                _turns.removeValue(forKey: key)
                             }
                         }
                         section.doMove()
+                        gridPositions.updateValue(section, forKey: key)
                     }
-                }
-                
-                if(canAdd) {
-                    addSection()
-                    canAdd = false
                 }
             }
         }
@@ -116,12 +114,12 @@ class Snake: Node {
 }
 
 class SnakeSection: GameObject {
-    
     override var renderPipelineStateType: RenderPipelineStateTypes { return .Snake }
     private var scalar: Float = (1 - GameSettings.GridLinesWidth)
     var direction: float3 = float3(1,0,0)
     var gridPositionX: Int = 0
     var gridPositionY: Int = 0
+    var color = float4(0.7,0.3,0.7,1)
     var gridPositionString: String {
         return "(\(gridPositionX),\(gridPositionY))"
     }
@@ -154,5 +152,10 @@ class SnakeSection: GameObject {
         self.setPosition(x, y, 0)
         gridPositionX += Int(round(direction.x)) 
         gridPositionY -= Int(round(direction.y))
+    }
+    
+    override func render(_ renderCommandEncoder: MTLRenderCommandEncoder) {
+        renderCommandEncoder.setFragmentBytes(&color, length: float4.size, index: 0)
+        super.render(renderCommandEncoder)
     }
 }

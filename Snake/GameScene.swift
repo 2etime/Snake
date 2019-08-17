@@ -33,41 +33,52 @@ class GameScene: Scene {
     
     func checkInput() {
         var nextDirection = snake.head.direction
-        if(Keyboard.IsKeyPressed(.upArrow)) {
+        if(Keyboard.IsKeyPressed(.upArrow) || Keyboard.IsKeyPressed(.w)) {
             nextDirection = float3(0,1,0)
         }
-        if(Keyboard.IsKeyPressed(.downArrow)) {
+        if(Keyboard.IsKeyPressed(.downArrow) || Keyboard.IsKeyPressed(.s)) {
             nextDirection = float3(0,-1,0)
         }
-        if(Keyboard.IsKeyPressed(.leftArrow)) {
+        if(Keyboard.IsKeyPressed(.leftArrow) || Keyboard.IsKeyPressed(.a)) {
             nextDirection = float3(-1,0,0)
         }
-        if(Keyboard.IsKeyPressed(.rightArrow)) {
+        if(Keyboard.IsKeyPressed(.rightArrow) || Keyboard.IsKeyPressed(.d)) {
             nextDirection = float3(1,0,0)
         }
-        
-        snake.setNextDirection(nextDirection: nextDirection)
+        if(nextDirection != snake.head.direction * -1) {
+            snake.setNextDirection(nextDirection: nextDirection)
+        }
     }
     
+    var totalTime: Float = 0.0
     override func doUpdate(deltaTime: Float) {
+        totalTime += deltaTime
+        
         checkInput()
         
         if(snake.head.gridPositionString == apple1.gridPositionString){
             score += 1
-            snake.canAdd = true
+            snake.addSection()
             apple1.moveApple()
         }
         
         if(snake.head.gridPositionString == apple2.gridPositionString){
             score += 1
-            snake.canAdd = true
+            snake.addSection()
             apple2.moveApple()
         }
         
         if(snake.head.gridPositionString.contains("-1")
             || snake.head.gridPositionString.contains("\(Int(GameSettings.GridCellsHigh))")
-            || snake.head.gridPositionString.contains("\(Int(GameSettings.GridCellsHigh ))")) {
+            || snake.head.gridPositionString.contains("\(Int(GameSettings.GridCellsHigh))")) {
             GameSettings.GameState = .GameOver
+        }
+    }
+    
+    override func afterUpdate(deltaTime: Float) {
+        if(snake.gridPositions[snake.head.gridPositionString] != nil){
+            GameSettings.GameState = .GameOver
+            snake.gridPositions[snake.head.gridPositionString]!.color = float4(1,0,0,1)
         }
     }
 }

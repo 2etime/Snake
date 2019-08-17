@@ -27,7 +27,6 @@ extension float2: sizeable { }
 extension float3: sizeable { }
 extension float4: sizeable { }
 
-
 struct Vertex: sizeable {
     var position: float3
     var textureCoordinate: float2
