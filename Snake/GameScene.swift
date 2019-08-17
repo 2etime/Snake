@@ -14,7 +14,7 @@ class GameScene: Scene {
         self.gridLines = GridLines()
         addChild(gridLines)
         addSnake()
-        addApple(count: 5)
+        addApple(count: 2)
     }
     
     func addApple(count: Int) {

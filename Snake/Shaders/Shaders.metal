@@ -74,24 +74,24 @@ fragment half4 grid_fragment_shader(RasterizerData rd [[ stage_in ]],
     float2 cellCounts = float2(gridConstants.cellsWide,gridConstants.cellsHigh);
     float lineWidth = 0.04;
     float4 gridColor = float4(1,0,1,1);
-    float4 backgroundColor = float4(0,0,0,1);
+    float4 backgroundColor = float4(0.02,0.02,0.02,1);
     float4 color = grid(cellCounts,
                         lineWidth,
                         texCoord,
                         gridColor,
                         backgroundColor) * 0.3;
     
-    float totalAttenuation = 0.0;
+    float3 totalAttenuation = 0.0;
     for(int i = 0; i < lightCount; i++) {
         LightData lightData = lightDatas[i];
         
         float dist = distance(lightData.position, rd.worldPosition);
-        float linearLightFalloff = 0.01;
+        float linearLightFalloff = 1.00;
         
-        float attenuation = (dist * linearLightFalloff);
-        totalAttenuation += attenuation;
+        float3 attenuation = 1 / (dist * linearLightFalloff);
+        totalAttenuation += max(attenuation, 0.054);
     }
-    color *= (1 / totalAttenuation);
+    color *= float4(totalAttenuation, 1.0);
     
     return half4(color.r, color.g, color.b, color.a);
 }
@@ -120,7 +120,9 @@ fragment half4 apple_fragment_shader(RasterizerData rd [[ stage_in ]],
                                      texture2d<float> texture [[ texture(0) ]],
                                      sampler sampler2d [[ sampler(0) ]]) {
     float4 color = texture.sample(sampler2d, rd.textureCoordinate);
-    
+    if(color.a <= 0.01) {
+        discard_fragment();
+    }
     return half4(color.r, color.g, color.b, color.a);
 }
 

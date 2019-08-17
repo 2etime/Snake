@@ -17,8 +17,8 @@ class Apple: LightObject {
     private func setInitialValues(cellX: Int, cellY: Int) {
         let scale = scalar * 0.9
         self.setScale(scale)
-        
-        moveApple()
+        setLightColor(float3(1,0,0))
+        _ = moveApple()
     }
     
     public func moveApple()->String {
