@@ -83,6 +83,12 @@ class Snake: Node {
         if(Keyboard.IsKeyPressed(.rightArrow)) {
             _nextDirection = float3(1,0,0)
         }
+        
+        if(_head.direction != _nextDirection) {
+            _head.setTurn(direction: _nextDirection)
+            _turns.updateValue(_nextDirection, forKey: "\(_head.gridPositionString )")
+        }
+        
     }
     
     var turnsToRemove: [String] = []
@@ -94,34 +100,30 @@ class Snake: Node {
         
         if(shouldUpdate) {
             checkInput()
-            for turn in turnsToRemove {
-                _turns.removeValue(forKey: turn)
-            }
-            turnsToRemove = []
-            
-            if(_head.direction != _nextDirection) {
-                _turns.updateValue(_nextDirection, forKey: "\(_head.gridPositionString )")
-            }
-            
-            for (i, child) in children.enumerated() {
-                if let section = child as? SnakeSection {
-                    if(_turns["\(section.gridPositionString)"] != nil) {
-                        let turn  = _turns["\(section.gridPositionString)"]!
-                        section.setTurn(direction: turn)
-                        if(i == children.count - 1) {
-                            turnsToRemove.append("\(section.gridPositionString)")
+
+            if(GameSettings.GameState != .GameOver) {
+                if(_head.direction != _nextDirection) {
+                    _turns.updateValue(_nextDirection, forKey: "\(_head.gridPositionString )")
+                }
+                
+                for (i, child) in children.enumerated() {
+                    if let section = child as? SnakeSection {
+                        if(_turns["\(section.gridPositionString)"] != nil) {
+                            let turn  = _turns["\(section.gridPositionString)"]!
+                            section.setTurn(direction: turn)
+                            if(i == children.count - 1) {
+                                _turns.removeValue(forKey: "\(section.gridPositionString)")
+                            }
                         }
+                        section.doMove()
                     }
-                    section.doMove()
+                }
+                
+                if(canAdd) {
+                    addSection()
+                    canAdd = false
                 }
             }
-            
-            if(canAdd) {
-                addSection()
-                canAdd = false
-            }
-            
-            
         }
     }
     

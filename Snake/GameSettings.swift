@@ -6,6 +6,11 @@ enum ClearColors {
     public static var DarkGray: MTLClearColor = MTLClearColor(red: 0.01, green: 0.01, blue: 0.01, alpha: 1.0)
 }
 
+enum GameStates {
+    case Running
+    case GameOver
+}
+
 class GameSettings {
     public static var ClearColor: MTLClearColor = ClearColors.DarkGray
     public static var MainPixelFormat: MTLPixelFormat = .bgra8Unorm_srgb
@@ -16,5 +21,6 @@ class GameSettings {
     public static var GridLinesWidth: Float = 0.05
     
     public static var SnakeSpeed: Float = 10.0
+    public static var GameState: GameStates = .Running
 }
 

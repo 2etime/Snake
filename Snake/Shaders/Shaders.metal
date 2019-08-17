@@ -47,9 +47,11 @@ float4 grid(float2 cellCounts,
     
     float x = fract(texCoord.x * cellsWide);
     float y = fract(texCoord.y * cellsHigh);
-    if (x < lineWidth || y < lineWidth || x > 1 - lineWidth || y > 1 - lineWidth) {
+    if (x < lineWidth ||
+        y < lineWidth ||
+        x > 1 - lineWidth ||
+        y > 1 - lineWidth)
         color = gridColor;
-    }
     
     return color;
 }
@@ -74,8 +76,14 @@ fragment half4 grid_fragment_shader(RasterizerData rd [[ stage_in ]],
 }
 
 fragment half4 grid_background_fragment_shader(RasterizerData rd [[ stage_in ]],
-                                    constant float &totalGameTime [[ buffer(0) ]]) {
-    float4 color = abs(float4(rd.textureCoordinate.x,rd.textureCoordinate.y,abs(sin(totalGameTime)), 1.0));
+                                    constant float &totalGameTime [[ buffer(0) ]],
+                                    constant bool &isOver [[ buffer(1) ]]) {
+    float4 color;
+    if(isOver) {
+        color = float4(1,0,0,1) * max(1 + cos(totalGameTime * 2), 0.1);
+    }else{
+        color = abs(float4(rd.textureCoordinate.x,rd.textureCoordinate.y,abs(sin(totalGameTime)), 1.0));
+    }
     
     return half4(color.r, color.g, color.b, color.a);
 }

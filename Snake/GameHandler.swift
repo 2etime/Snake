@@ -30,7 +30,7 @@ class GameHandler: NSObject, MTKViewDelegate {
     
     func draw(in view: MTKView) {
         //dispatch_semaphore_wait(inflightSemaphore, DISPATCH_TIME_FOREVER)
-        inflightSemaphore.wait(timeout: .distantFuture)
+        _ = inflightSemaphore.wait(timeout: .distantFuture)
         
         let commandBuffer = Engine.CommandQueue.makeCommandBuffer()
         commandBuffer?.addCompletedHandler({ (buffer) in
