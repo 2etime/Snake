@@ -3,6 +3,9 @@ import MetalKit
 class GameHandler: NSObject, MTKViewDelegate {
     var scene: Scene!
     
+    //var inflightSemaphore = dispatch_semaphore_create(3)
+    var inflightSemaphore = DispatchSemaphore(value: 3)
+    
     init(view: MTKView) {
         super.init()
         
@@ -26,7 +29,14 @@ class GameHandler: NSObject, MTKViewDelegate {
     }
     
     func draw(in view: MTKView) {
+        //dispatch_semaphore_wait(inflightSemaphore, DISPATCH_TIME_FOREVER)
+        inflightSemaphore.wait(timeout: .distantFuture)
+        
         let commandBuffer = Engine.CommandQueue.makeCommandBuffer()
+        commandBuffer?.addCompletedHandler({ (buffer) in
+            //dispatch_semaphore_signal(strongSelf.inflightSemaphore)
+            self.inflightSemaphore.signal()
+        })
         let renderCommandEncoder = commandBuffer?.makeRenderCommandEncoder(descriptor: view.currentRenderPassDescriptor!)
     
         let deltaTime: Float = 1 / Float(view.preferredFramesPerSecond)

@@ -4,6 +4,7 @@ class Node {
     private var _position: float3 = float3(0,0,0)
     private var _rotation: float3 = float3(0,0,0)
     private var _scale: float3 = float3(1,1,1)
+    var parentModelMatrix = matrix_identity_float4x4
     var modelMatrix: matrix_float4x4 {
         var modelMatrix = matrix_identity_float4x4
         modelMatrix.translate(self._position)
@@ -11,26 +12,29 @@ class Node {
         modelMatrix.rotate(angle: self._rotation.y, axis: Y_AXIS)
         modelMatrix.rotate(angle: self._rotation.z, axis: Z_AXIS)
         modelMatrix.scale(self._scale)
-        return modelMatrix
+        return matrix_multiply(parentModelMatrix, modelMatrix)
     }
     
-    private var _children: [Node] = []
+   var children: [Node] = []
     
     public func addChild(_ child: Node) {
-        self._children.append(child)
+        self.children.append(child)
     }
     
     func doUpdate(deltaTime: Float) { }
     
+    func afterUpdate(deltaTime: Float) { }
+    
     func update(deltaTime: Float) {
         doUpdate(deltaTime: deltaTime)
-        for child in _children {
+        for child in children {
+            child.parentModelMatrix = modelMatrix
             child.update(deltaTime: deltaTime)
         }
     }
     
     func render(_ renderCommandEncoder: MTLRenderCommandEncoder) {
-        for child in _children {
+        for child in children {
             child.render(renderCommandEncoder)
         }
     }

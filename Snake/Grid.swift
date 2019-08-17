@@ -13,8 +13,6 @@ class Grid: GameObject {
         let scale = float3(GameSettings.GridCellsWide,
                            GameSettings.GridCellsHigh, 1.0)
         self.setScale(scale)
-        
-        addChild(GridLines())
     }
     
     override func doUpdate(deltaTime: Float) {
