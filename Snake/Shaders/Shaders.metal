@@ -67,7 +67,7 @@ fragment half4 grid_fragment_shader(RasterizerData rd [[ stage_in ]],
                         lineWidth,
                         texCoord,
                         gridColor,
-                        backgroundColor);
+                        backgroundColor) * 0.3;
     
     
     return half4(color.r, color.g, color.b, color.a);
@@ -81,7 +81,7 @@ fragment half4 grid_background_fragment_shader(RasterizerData rd [[ stage_in ]],
 }
 
 fragment half4 snake_fragment_shader(RasterizerData rd [[ stage_in ]]) {
-    float4 color = float4(1,0,0,1);
+    float4 color = float4(0.7,0.3,0.7,1);
     
     return half4(color.r, color.g, color.b, color.a);
 }

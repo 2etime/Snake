@@ -29,10 +29,4 @@ class GameScene: Scene {
             apple.moveApple()
         }
     }
-    
-    override func afterUpdate(deltaTime: Float) {
-        
-        
-        
-    }
 }
