@@ -60,7 +60,7 @@ fragment half4 grid_fragment_shader(RasterizerData rd [[ stage_in ]],
     float2 texCoord = rd.textureCoordinate;
     
     float2 cellCounts = float2(gridConstants.cellsWide,gridConstants.cellsHigh);
-    float lineWidth = 0.02;
+    float lineWidth = 0.03;
     float4 gridColor = float4(1,0,1,1);
     float4 backgroundColor = float4(0,0,0,1);
     float4 color = grid(cellCounts,

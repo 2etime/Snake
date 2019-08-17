@@ -12,11 +12,12 @@ class Grid: GameObject {
         
         let scale = float3(GameSettings.GridCellsWide,
                            GameSettings.GridCellsHigh, 1.0)
-        self.setScale(scale)
+        self.setScale(scale * 2)
     }
     
     override func doUpdate(deltaTime: Float) {
         _totalTime += deltaTime
+        self.rotateZ(deltaTime)
     }
     
     override func render(_ renderCommandEncoder: MTLRenderCommandEncoder) {

@@ -108,7 +108,6 @@ class Snake: Node {
                     if(_turns["\(section.gridPositionString)"] != nil) {
                         let turn  = _turns["\(section.gridPositionString)"]!
                         section.setTurn(direction: turn)
-                        
                         if(i == children.count - 1) {
                             turnsToRemove.append("\(section.gridPositionString)")
                         }
