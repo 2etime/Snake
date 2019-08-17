@@ -31,6 +31,7 @@ class Node {
             child.parentModelMatrix = modelMatrix
             child.update(deltaTime: deltaTime)
         }
+        afterUpdate(deltaTime: deltaTime)
     }
     
     func render(_ renderCommandEncoder: MTLRenderCommandEncoder) {

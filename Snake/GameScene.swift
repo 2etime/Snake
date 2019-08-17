@@ -31,7 +31,27 @@ class GameScene: Scene {
         addChild(snake)
     }
     
+    func checkInput() {
+        var nextDirection = snake.head.direction
+        if(Keyboard.IsKeyPressed(.upArrow)) {
+            nextDirection = float3(0,1,0)
+        }
+        if(Keyboard.IsKeyPressed(.downArrow)) {
+            nextDirection = float3(0,-1,0)
+        }
+        if(Keyboard.IsKeyPressed(.leftArrow)) {
+            nextDirection = float3(-1,0,0)
+        }
+        if(Keyboard.IsKeyPressed(.rightArrow)) {
+            nextDirection = float3(1,0,0)
+        }
+        
+        snake.setNextDirection(nextDirection: nextDirection)
+    }
+    
     override func doUpdate(deltaTime: Float) {
+        checkInput()
+        
         if(snake.head.gridPositionString == apple1.gridPositionString){
             score += 1
             snake.canAdd = true
@@ -45,8 +65,8 @@ class GameScene: Scene {
         }
         
         if(snake.head.gridPositionString.contains("-1")
-            || snake.head.gridPositionString.contains("\(Int(GameSettings.GridCellsHigh + 1))")
-            || snake.head.gridPositionString.contains("\(Int(GameSettings.GridCellsHigh + 1))")) {
+            || snake.head.gridPositionString.contains("\(Int(GameSettings.GridCellsHigh))")
+            || snake.head.gridPositionString.contains("\(Int(GameSettings.GridCellsHigh ))")) {
             GameSettings.GameState = .GameOver
         }
     }

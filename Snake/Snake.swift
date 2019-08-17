@@ -17,6 +17,7 @@ class Snake: Node {
     private var _nextDirection: float3 = float3(1,0,0)
     private var _turns: [String: float3] = [:]
     var canAdd: Bool = false
+    var turnsToRemove: [String] = []
     override init() {
         super.init()
         
@@ -70,28 +71,15 @@ class Snake: Node {
         }
     }
     
-    func checkInput() {
-        if(Keyboard.IsKeyPressed(.upArrow)) {
-            _nextDirection = float3(0,1,0)
-        }
-        if(Keyboard.IsKeyPressed(.downArrow)) {
-            _nextDirection = float3(0,-1,0)
-        }
-        if(Keyboard.IsKeyPressed(.leftArrow)) {
-            _nextDirection = float3(-1,0,0)
-        }
-        if(Keyboard.IsKeyPressed(.rightArrow)) {
-            _nextDirection = float3(1,0,0)
-        }
+    func setNextDirection(nextDirection: float3) {
+        self._nextDirection = nextDirection
         
-        if(_head.direction != _nextDirection) {
+        if(head.direction != nextDirection) {
             _head.setTurn(direction: _nextDirection)
             _turns.updateValue(_nextDirection, forKey: "\(_head.gridPositionString )")
         }
-        
     }
     
-    var turnsToRemove: [String] = []
     override func doUpdate(deltaTime: Float) {
         
         if(Keyboard.IsKeyPressed(.space)) {
@@ -99,8 +87,6 @@ class Snake: Node {
         }
         
         if(shouldUpdate) {
-            checkInput()
-
             if(GameSettings.GameState != .GameOver) {
                 if(_head.direction != _nextDirection) {
                     _turns.updateValue(_nextDirection, forKey: "\(_head.gridPositionString )")
