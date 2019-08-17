@@ -33,6 +33,7 @@
 		C6F03DED2306660E00FE1A07 /* GameObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6F03DEC2306660E00FE1A07 /* GameObject.swift */; };
 		C6F03DEF230667C000FE1A07 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6F03DEE230667C000FE1A07 /* GameScene.swift */; };
 		C6F03DF123070A7B00FE1A07 /* Grid.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6F03DF023070A7B00FE1A07 /* Grid.swift */; };
+		C6F03DF323085CCF00FE1A07 /* LightObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6F03DF223085CCF00FE1A07 /* LightObject.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -65,6 +66,7 @@
 		C6F03DEC2306660E00FE1A07 /* GameObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameObject.swift; sourceTree = "<group>"; };
 		C6F03DEE230667C000FE1A07 /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
 		C6F03DF023070A7B00FE1A07 /* Grid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Grid.swift; sourceTree = "<group>"; };
+		C6F03DF223085CCF00FE1A07 /* LightObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LightObject.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,6 +111,7 @@
 				C6F03DEC2306660E00FE1A07 /* GameObject.swift */,
 				C6F03DDD2304FFC000FE1A07 /* Scene.swift */,
 				C6F03DEE230667C000FE1A07 /* GameScene.swift */,
+				C6F03DF223085CCF00FE1A07 /* LightObject.swift */,
 				C6F03DF023070A7B00FE1A07 /* Grid.swift */,
 				C6F03DCE2304D57200FE1A07 /* Snake.swift */,
 				C6F03DDF230505A200FE1A07 /* Apple.swift */,
@@ -251,6 +254,7 @@
 				C6F03DD82304F94300FE1A07 /* RenderPipelineStates.swift in Sources */,
 				C6F03DE22305071D00FE1A07 /* SamplerStates.swift in Sources */,
 				C6F03DDE2304FFC000FE1A07 /* Scene.swift in Sources */,
+				C6F03DF323085CCF00FE1A07 /* LightObject.swift in Sources */,
 				C602404C2303B48400807C8B /* Math.swift in Sources */,
 				C60240442303B13C00807C8B /* GameView.swift in Sources */,
 				C6F03DE0230505A200FE1A07 /* Apple.swift in Sources */,

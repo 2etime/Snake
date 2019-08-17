@@ -45,3 +45,8 @@ struct GridConstants: sizeable {
     var cellsWide: Float = 1.0
     var cellsHigh: Float = 1.0
 };
+
+struct LightData: sizeable {
+    var position: float3 = float3(0,0,0)
+    var color: float3 = float3(0,0,0)
+}

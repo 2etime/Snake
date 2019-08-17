@@ -1,8 +1,7 @@
 import MetalKit
 
 class GameScene: Scene {
-    var apple1: Apple!
-    var apple2: Apple!
+    var apples: [Apple] = []
     var snake: Snake!
     var score: Int = 0
     var grid: Grid!
@@ -15,15 +14,15 @@ class GameScene: Scene {
         self.gridLines = GridLines()
         addChild(gridLines)
         addSnake()
-        addApple()
+        addApple(count: 5)
     }
     
-    func addApple() {
-        self.apple1 = Apple()
-        addChild(apple1)
-        
-        self.apple2 = Apple()
-        addChild(apple2)
+    func addApple(count: Int) {
+        for _ in 0..<count {
+            let apple = Apple()
+            addLight(apple)
+            apples.append(apple)
+        }
     }
     
     func addSnake() {
@@ -56,16 +55,16 @@ class GameScene: Scene {
         
         checkInput()
         
-        if(snake.head.gridPositionString == apple1.gridPositionString){
-            score += 1
-            snake.addSection()
-            apple1.moveApple()
-        }
-        
-        if(snake.head.gridPositionString == apple2.gridPositionString){
-            score += 1
-            snake.addSection()
-            apple2.moveApple()
+        for apple in apples {
+            if(snake.head.gridPositionString == apple.gridPositionString){
+                score += 1
+                snake.addSection()
+                
+                var applePositionGridString = apple.moveApple()
+                while(snake.gridPositions[applePositionGridString] != nil) {
+                    applePositionGridString = apple.moveApple()
+                }
+            }
         }
         
         if(snake.head.gridPositionString.contains("-1")

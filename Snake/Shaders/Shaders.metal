@@ -9,6 +9,7 @@ struct Vertex {
 struct RasterizerData {
     float4 position [[ position ]];
     float2 textureCoordinate;
+    float3 worldPosition;
 };
 
 struct SceneConstants {
@@ -24,13 +25,20 @@ struct GridConstants {
     float cellsHigh;
 };
 
+struct LightData {
+    float3 position;
+    float3 color;
+};
+
 vertex RasterizerData basic_vertex_shader(Vertex vIn [[ stage_in ]],
                                          constant SceneConstants &sceneConstants [[ buffer(1) ]],
                                          constant ModelConstants &modelConstants [[ buffer(2) ]]) {
     RasterizerData rd;
     
-    rd.position = sceneConstants.projectionMatrix * modelConstants.modelMatrix * float4(vIn.position, 1.0);
+    float4 worldPosition = modelConstants.modelMatrix * float4(vIn.position, 1.0);
+    rd.position = sceneConstants.projectionMatrix * worldPosition;
     rd.textureCoordinate = vIn.textureCoordinate;
+    rd.worldPosition = worldPosition.xyz;
     
     return rd;
 }
@@ -57,7 +65,9 @@ float4 grid(float2 cellCounts,
 }
 
 fragment half4 grid_fragment_shader(RasterizerData rd [[ stage_in ]],
-                                    constant GridConstants &gridConstants [[ buffer(1) ]]) {
+                                    constant GridConstants &gridConstants [[ buffer(1) ]],
+                                    constant int &lightCount [[ buffer(2) ]],
+                                    constant LightData *lightDatas [[ buffer(3) ]]) {
 
     float2 texCoord = rd.textureCoordinate;
     
@@ -71,6 +81,17 @@ fragment half4 grid_fragment_shader(RasterizerData rd [[ stage_in ]],
                         gridColor,
                         backgroundColor) * 0.3;
     
+    float totalAttenuation = 0.0;
+    for(int i = 0; i < lightCount; i++) {
+        LightData lightData = lightDatas[i];
+        
+        float dist = distance(lightData.position, rd.worldPosition);
+        float linearLightFalloff = 0.01;
+        
+        float attenuation = (dist * linearLightFalloff);
+        totalAttenuation += attenuation;
+    }
+    color *= (1 / totalAttenuation);
     
     return half4(color.r, color.g, color.b, color.a);
 }

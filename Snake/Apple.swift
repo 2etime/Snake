@@ -1,6 +1,6 @@
 import MetalKit
 
-class Apple: GameObject {
+class Apple: LightObject {
     override var renderPipelineStateType: RenderPipelineStateTypes { return .Apple }
     private var _texture: MTLTexture!
     var gridPositionX: Int = 0
@@ -21,7 +21,7 @@ class Apple: GameObject {
         moveApple()
     }
     
-    public func moveApple() {
+    public func moveApple()->String {
         let cellX: Int = Int.random(in: 0..<(Int(GameSettings.GridCellsWide) - 2))
         let cellY: Int = Int.random(in: 0..<(Int(GameSettings.GridCellsWide) - 2))
         let x: Float = (Float(cellX) - (floor(GameSettings.GridCellsWide / 2))) * scalar
@@ -30,6 +30,7 @@ class Apple: GameObject {
         
         self.gridPositionX = cellX
         self.gridPositionY = cellY
+        return gridPositionString
     }
     
     override func render(_ renderCommandEncoder: MTLRenderCommandEncoder) {
