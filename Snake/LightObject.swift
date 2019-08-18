@@ -29,7 +29,7 @@ class LightManager {
 
 class LightObject: GameObject {
     var lightData = LightData()
-    
+
     override func update(deltaTime: Float) {
         self.lightData.position = self.getPosition()
         super.update(deltaTime: deltaTime)

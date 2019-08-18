@@ -34,6 +34,8 @@
 		C6F03DEF230667C000FE1A07 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6F03DEE230667C000FE1A07 /* GameScene.swift */; };
 		C6F03DF123070A7B00FE1A07 /* Grid.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6F03DF023070A7B00FE1A07 /* Grid.swift */; };
 		C6F03DF323085CCF00FE1A07 /* LightObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6F03DF223085CCF00FE1A07 /* LightObject.swift */; };
+		C6F03DFC2309D44000FE1A07 /* InstancedGameObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6F03DFB2309D44000FE1A07 /* InstancedGameObject.swift */; };
+		C6F03DFE2309D78F00FE1A07 /* AppleAteParticles.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6F03DFD2309D78F00FE1A07 /* AppleAteParticles.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -67,6 +69,8 @@
 		C6F03DEE230667C000FE1A07 /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
 		C6F03DF023070A7B00FE1A07 /* Grid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Grid.swift; sourceTree = "<group>"; };
 		C6F03DF223085CCF00FE1A07 /* LightObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LightObject.swift; sourceTree = "<group>"; };
+		C6F03DFB2309D44000FE1A07 /* InstancedGameObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstancedGameObject.swift; sourceTree = "<group>"; };
+		C6F03DFD2309D78F00FE1A07 /* AppleAteParticles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleAteParticles.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,6 +113,8 @@
 				C6F03DE6230508CF00FE1A07 /* Textures.swift */,
 				C6F03DDB2304FF3600FE1A07 /* Node.swift */,
 				C6F03DEC2306660E00FE1A07 /* GameObject.swift */,
+				C6F03DFB2309D44000FE1A07 /* InstancedGameObject.swift */,
+				C6F03DFD2309D78F00FE1A07 /* AppleAteParticles.swift */,
 				C6F03DDD2304FFC000FE1A07 /* Scene.swift */,
 				C6F03DEE230667C000FE1A07 /* GameScene.swift */,
 				C6F03DF223085CCF00FE1A07 /* LightObject.swift */,
@@ -252,6 +258,7 @@
 				C60240352303B0FD00807C8B /* Snake.xcdatamodeld in Sources */,
 				C602404A2303B34D00807C8B /* GameSettings.swift in Sources */,
 				C6F03DD82304F94300FE1A07 /* RenderPipelineStates.swift in Sources */,
+				C6F03DFE2309D78F00FE1A07 /* AppleAteParticles.swift in Sources */,
 				C6F03DE22305071D00FE1A07 /* SamplerStates.swift in Sources */,
 				C6F03DDE2304FFC000FE1A07 /* Scene.swift in Sources */,
 				C6F03DF323085CCF00FE1A07 /* LightObject.swift in Sources */,
@@ -262,6 +269,7 @@
 				C6F03DE7230508CF00FE1A07 /* Textures.swift in Sources */,
 				C60240542303B6F100807C8B /* ShaderTypes.swift in Sources */,
 				C6F03DEF230667C000FE1A07 /* GameScene.swift in Sources */,
+				C6F03DFC2309D44000FE1A07 /* InstancedGameObject.swift in Sources */,
 				C60240522303B6E100807C8B /* Shaders.metal in Sources */,
 				C6F03DDA2304FC9300FE1A07 /* Meshes.swift in Sources */,
 				C60240302303B0FD00807C8B /* AppDelegate.swift in Sources */,

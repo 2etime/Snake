@@ -126,6 +126,29 @@ fragment half4 apple_fragment_shader(RasterizerData rd [[ stage_in ]],
     return half4(color.r, color.g, color.b, color.a);
 }
 
+vertex RasterizerData instanced_vertex_shader(const Vertex vIn [[ stage_in ]],
+                                              constant SceneConstants &sceneConstants [[ buffer(1) ]],
+                                              constant ModelConstants *modelConstants [[ buffer(2) ]],
+                                              uint instanceId [[ instance_id ]]){
+    RasterizerData rd;
+    
+    ModelConstants modelConstant = modelConstants[instanceId];
+    
+    float4 worldPosition = modelConstant.modelMatrix * float4(vIn.position, 1.0);
+    rd.position = sceneConstants.projectionMatrix * worldPosition;
+    rd.textureCoordinate = vIn.textureCoordinate;
+    rd.worldPosition = worldPosition.xyz;
+    
+    return rd;
+}
+
+fragment half4 basic_fragment_shader(RasterizerData rd [[ stage_in ]],
+                                     constant int &elapsedTime [[ buffer(0) ]]) {
+    float4 color = float4(1.0,0.0,0.0,1) * (15 / (float)elapsedTime);
+    
+    return half4(color.r, color.g, color.b, color.a);
+}
+
 
 
 

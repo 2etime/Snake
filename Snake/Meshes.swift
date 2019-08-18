@@ -6,6 +6,7 @@ class Mesh {
     
     private var _vertexBuffer: MTLBuffer!
     private var _indexBuffer: MTLBuffer!
+    private var _instanceCount: Int = 1
     
     init() {
         getVertices()
@@ -27,13 +28,18 @@ class Mesh {
         self._indexBuffer = Engine.Device.makeBuffer(bytes: self._indices, length: UInt32.stride(self._indices.count), options: [])
     }
     
+    func setInstanceCount(_ count: Int) {
+        self._instanceCount = count
+    }
+    
     func draw(_ renderCommandEncoder: MTLRenderCommandEncoder) {
         renderCommandEncoder.setVertexBuffer(_vertexBuffer, offset: 0, index: 0)
         renderCommandEncoder.drawIndexedPrimitives(type: .triangle,
                                                    indexCount: self._indices.count,
                                                    indexType: .uint32,
                                                    indexBuffer: self._indexBuffer,
-                                                   indexBufferOffset: 0)
+                                                   indexBufferOffset: 0,
+                                                   instanceCount: _instanceCount)
     }
     
 }

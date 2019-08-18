@@ -6,6 +6,8 @@ class GameScene: Scene {
     var score: Int = 0
     var grid: Grid!
     var gridLines: GridLines!
+    var appleParticles: [AppleAteParticles] = []
+    var currentParticles: Int = 0
     
     override func buildScene() {
         self.grid = Grid()
@@ -15,6 +17,23 @@ class GameScene: Scene {
         addChild(gridLines)
         addSnake()
         addApple(count: 2)
+     
+        addAppleParticles()
+    }
+    
+    func addAppleParticles() {
+        for _ in 0..<5{
+            let appleParticle = AppleAteParticles()
+            appleParticles.append(appleParticle)
+            addChild(appleParticle)
+        }
+    }
+    
+    func getAppleParticles()->AppleAteParticles {
+        
+        let particles = appleParticles[currentParticles]
+        currentParticles = currentParticles == appleParticles.count - 1 ? 0 : currentParticles + 1
+        return particles
     }
     
     func addApple(count: Int) {
@@ -54,12 +73,11 @@ class GameScene: Scene {
         totalTime += deltaTime
         
         checkInput()
-        
         for apple in apples {
             if(snake.head.gridPositionString == apple.gridPositionString){
                 score += 1
                 snake.addSection()
-                
+                getAppleParticles().doAnimation(cellX: snake.head.gridPositionX, cellY: snake.head.gridPositionY)
                 var applePositionGridString = apple.moveApple()
                 while(snake.gridPositions[applePositionGridString] != nil) {
                     applePositionGridString = apple.moveApple()
