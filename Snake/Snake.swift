@@ -12,6 +12,7 @@ class Snake: Node {
         return false
     }
     
+    private let _startingPosition = int2(4,4)
     private var _head: SnakeSection!
     public var head: SnakeSection { return self._head}
     private var _nextDirection: float3 = float3(1,0,0)
@@ -34,8 +35,8 @@ class Snake: Node {
     
     func addSection() {
         if(_head == nil) {
-            self._head = SnakeSection(cellX: Int(GameSettings.GridCellsWide / 2),
-                                      cellY: Int(GameSettings.GridCellsHigh / 2),
+            self._head = SnakeSection(cellX: Int(_startingPosition.x),
+                                      cellY: Int(_startingPosition.y),
                                       direction: _nextDirection)
             addChild(self._head)
         } else {
@@ -135,10 +136,8 @@ class SnakeSection: GameObject {
     private func setInitialValues(cellX: Int, cellY: Int) {
         let scale = scalar * 0.9
         self.setScale(scale)
-        
-        let x: Float = (Float(cellX) - (floor(GameSettings.GridCellsWide / 2))) * scalar
-        let y: Float = (-Float(cellY) + (floor(GameSettings.GridCellsHigh / 2))) * scalar
-        self.setPosition(float3(x, y, 0.0))
+        let screenPosition = Grid.getScreenPosition(cellX: cellX, cellY: cellY) * scalar
+        self.setPosition(screenPosition)
     }
     
     func setTurn(direction: float3) {
@@ -147,9 +146,8 @@ class SnakeSection: GameObject {
     
     func doMove() {
         let scalar = (1 - GameSettings.GridLinesWidth)
-        let x: Float = (Float(gridPositionX) - (floor(GameSettings.GridCellsWide / 2))) * scalar
-        let y: Float = (-Float(gridPositionY) + (floor(GameSettings.GridCellsHigh / 2))) * scalar
-        self.setPosition(x, y, 0)
+        let screenPosition = Grid.getScreenPosition(cellX: gridPositionX, cellY: gridPositionY) * scalar
+        self.setPosition(screenPosition)
         gridPositionX += Int(round(direction.x)) 
         gridPositionY -= Int(round(direction.y))
         

@@ -30,6 +30,14 @@ class Grid: GameObject {
     }
 }
 
+extension Grid {
+    static func getScreenPosition(cellX: Int, cellY: Int)->float3 {
+        let x: Float = (Float(cellX) - (floor(GameSettings.GridCellsWide / 2)))
+        let y: Float = (-Float(cellY) + (floor(GameSettings.GridCellsHigh / 2)))
+        return float3(x, y, 0.0)
+    }
+}
+
 class GridLines: GameObject {
     private var _gridConstants = GridConstants()
     override var renderPipelineStateType: RenderPipelineStateTypes { return .Grid }

@@ -26,7 +26,7 @@
 		C6F03DDA2304FC9300FE1A07 /* Meshes.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6F03DD92304FC9300FE1A07 /* Meshes.swift */; };
 		C6F03DDC2304FF3600FE1A07 /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6F03DDB2304FF3600FE1A07 /* Node.swift */; };
 		C6F03DDE2304FFC000FE1A07 /* Scene.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6F03DDD2304FFC000FE1A07 /* Scene.swift */; };
-		C6F03DE0230505A200FE1A07 /* Textured.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6F03DDF230505A200FE1A07 /* Textured.swift */; };
+		C6F03DE0230505A200FE1A07 /* Apple.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6F03DDF230505A200FE1A07 /* Apple.swift */; };
 		C6F03DE22305071D00FE1A07 /* SamplerStates.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6F03DE12305071D00FE1A07 /* SamplerStates.swift */; };
 		C6F03DE5230508AA00FE1A07 /* apple.png in Resources */ = {isa = PBXBuildFile; fileRef = C6F03DE4230508AA00FE1A07 /* apple.png */; };
 		C6F03DE7230508CF00FE1A07 /* Textures.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6F03DE6230508CF00FE1A07 /* Textures.swift */; };
@@ -61,7 +61,7 @@
 		C6F03DD92304FC9300FE1A07 /* Meshes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Meshes.swift; sourceTree = "<group>"; };
 		C6F03DDB2304FF3600FE1A07 /* Node.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Node.swift; sourceTree = "<group>"; };
 		C6F03DDD2304FFC000FE1A07 /* Scene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scene.swift; sourceTree = "<group>"; };
-		C6F03DDF230505A200FE1A07 /* Textured.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Textured.swift; sourceTree = "<group>"; };
+		C6F03DDF230505A200FE1A07 /* Apple.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Apple.swift; sourceTree = "<group>"; };
 		C6F03DE12305071D00FE1A07 /* SamplerStates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SamplerStates.swift; sourceTree = "<group>"; };
 		C6F03DE4230508AA00FE1A07 /* apple.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = apple.png; sourceTree = "<group>"; };
 		C6F03DE6230508CF00FE1A07 /* Textures.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Textures.swift; sourceTree = "<group>"; };
@@ -120,7 +120,7 @@
 				C6F03DF223085CCF00FE1A07 /* LightObject.swift */,
 				C6F03DF023070A7B00FE1A07 /* Grid.swift */,
 				C6F03DCE2304D57200FE1A07 /* Snake.swift */,
-				C6F03DDF230505A200FE1A07 /* Textured.swift */,
+				C6F03DDF230505A200FE1A07 /* Apple.swift */,
 				C60240502303B6D200807C8B /* Shaders */,
 				C602404D2303B4E500807C8B /* Utils */,
 				C6F03DE32305089600FE1A07 /* Res */,
@@ -264,7 +264,7 @@
 				C6F03DF323085CCF00FE1A07 /* LightObject.swift in Sources */,
 				C602404C2303B48400807C8B /* Math.swift in Sources */,
 				C60240442303B13C00807C8B /* GameView.swift in Sources */,
-				C6F03DE0230505A200FE1A07 /* Textured.swift in Sources */,
+				C6F03DE0230505A200FE1A07 /* Apple.swift in Sources */,
 				C6F03DDC2304FF3600FE1A07 /* Node.swift in Sources */,
 				C6F03DE7230508CF00FE1A07 /* Textures.swift in Sources */,
 				C60240542303B6F100807C8B /* ShaderTypes.swift in Sources */,

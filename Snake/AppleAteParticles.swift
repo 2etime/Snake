@@ -25,9 +25,8 @@ class AppleAteParticles: InstancedGameObject {
     func doAnimation(cellX: Int, cellY: Int) {
         self._currentAnimationTime = 0
         self._doAnimation = true
-        let x: Float = (Float(cellX) - (floor(GameSettings.GridCellsWide / 2)))
-        let y: Float = (-Float(cellY) + (floor(GameSettings.GridCellsHigh / 2)))
-        startAnimation(posX: x, posY: y)
+        let screenPosition = Grid.getScreenPosition(cellX: cellX, cellY: cellY)
+        startAnimation(posX: screenPosition.x, posY: screenPosition.y)
     }
     
     override func doUpdate(deltaTime: Float) {
