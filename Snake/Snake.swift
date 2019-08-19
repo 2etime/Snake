@@ -20,7 +20,6 @@ class Snake: Node {
     var turnsToRemove: [String] = []
     override init() {
         super.init()
-        
         addSection()
 //        addSection()
 //        addSection()
@@ -105,6 +104,14 @@ class Snake: Node {
                             }
                         }
                         section.doMove()
+                        
+                        let gridPositionsHead = gridPositions[head.gridPositionString]
+                        let gridPositionsSection = gridPositions[section.gridPositionString]
+                        if(section.id != head.id && gridPositionsHead?.gridPositionString == gridPositionsSection?.gridPositionString){
+                            GameSettings.GameState = .GameOver
+                            gridPositions[head.gridPositionString]!.color = float4(1,0,0,1)
+                        }
+                        
                         gridPositions.updateValue(section, forKey: key)
                     }
                 }
@@ -149,7 +156,6 @@ class SnakeSection: GameObject {
         let screenPosition = Grid.getScreenPosition(cellX: gridPositionX, cellY: gridPositionY) * scalar
         self.setPosition(screenPosition)
 
-        print(gridPositionY)
         gridPositionX += Int(round(direction.x))
         gridPositionY -= Int(round(direction.y))
         
@@ -157,10 +163,7 @@ class SnakeSection: GameObject {
             //Through the wall magic
             if(gridPositionX < 0) { gridPositionX = Int(GameSettings.GridCellsWide - 1) }
             if(gridPositionX > Int(GameSettings.GridCellsWide - 1)) { gridPositionX = 0 }
-            if(gridPositionY < 0) {
-                gridPositionY = Int(GameSettings.GridCellsHigh - 1)
-                
-            }
+            if(gridPositionY < 0) { gridPositionY = Int(GameSettings.GridCellsHigh - 1) }
             if(gridPositionY > Int(GameSettings.GridCellsHigh - 1)) { gridPositionY = 0 }
         }
 

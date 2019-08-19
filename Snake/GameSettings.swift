@@ -15,7 +15,7 @@ class GameSettings {
     public static var ClearColor: MTLClearColor = ClearColors.DarkGray
     public static var MainPixelFormat: MTLPixelFormat = .bgra8Unorm_srgb
     
-    private static var _gridSize: float2 = float2(21,21)
+    private static var _gridSize: float2 = float2(11,11)
     public static var GridCellsWide: Float { return _gridSize.x }
     public static var GridCellsHigh: Float { return _gridSize.y }
     public static var GridLinesWidth: Float = 0.05

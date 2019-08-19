@@ -15,7 +15,12 @@ class Node {
         return matrix_multiply(parentModelMatrix, modelMatrix)
     }
     
-   var children: [Node] = []
+    var children: [Node] = []
+    var id: String = ""
+    
+    init() {
+        self.id = UUID.init().uuidString
+    }
     
     public func addChild(_ child: Node) {
         self.children.append(child)

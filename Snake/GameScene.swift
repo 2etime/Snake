@@ -93,11 +93,4 @@ class GameScene: Scene {
             }            
         }
     }
-    
-    override func afterUpdate(deltaTime: Float) {
-        if(snake.gridPositions[snake.head.gridPositionString] != nil){
-            GameSettings.GameState = .GameOver
-            snake.gridPositions[snake.head.gridPositionString]!.color = float4(1,0,0,1)
-        }
-    }
 }
