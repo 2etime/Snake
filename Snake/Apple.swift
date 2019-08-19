@@ -1,16 +1,11 @@
 import MetalKit
 
 class Apple: LightObject {
-    override var renderPipelineStateType: RenderPipelineStateTypes { return .Textured }
-    private var _texture: MTLTexture!
-    var gridPositionX: Int = 0
-    var gridPositionY: Int = 0
-    var gridPositionString: String { return "(\(gridPositionX),\(gridPositionY))" }
     private var scalar: Float = (1 - GameSettings.GridLinesWidth)
     
     init() {
         super.init(mesh: SquareMesh())
-         _texture = Textures.get(.Apple)
+        setTexture(Textures.get(.Apple))
         setInitialValues(cellX: 0, cellY: 0)
     }
     
@@ -30,11 +25,5 @@ class Apple: LightObject {
         self.gridPositionX = cellX
         self.gridPositionY = cellY
         return gridPositionString
-    }
-    
-    override func render(_ renderCommandEncoder: MTLRenderCommandEncoder) {
-        renderCommandEncoder.setFragmentSamplerState(SamplerStates.get(.Less), index: 0)
-        renderCommandEncoder.setFragmentTexture(_texture, index: 0)
-        super.render(renderCommandEncoder)
     }
 }

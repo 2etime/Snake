@@ -1,7 +1,7 @@
 import MetalKit
 
 enum RenderPipelineStateTypes {
-    case Snake
+    case Basic
     case Grid
     case GridBackground
     case Textured
@@ -12,7 +12,7 @@ class RenderPipelineStates {
     private static var _library: [RenderPipelineStateTypes: MTLRenderPipelineState] = [:]
     
     public static func Initialize() {
-        _library.updateValue(buildSnakeRenderPipelineState(), forKey: .Snake)
+        _library.updateValue(buildBasicRenderPipelineState(), forKey: .Basic)
         _library.updateValue(buildGridRenderPipelineState(), forKey: .Grid)
         _library.updateValue(buildGridBackgroundRenderPipelineState(), forKey: .GridBackground)
         _library.updateValue(buildTexturedRenderPipelineState(), forKey: .Textured)
@@ -153,9 +153,9 @@ class RenderPipelineStates {
     }
     
     
-    private static func buildSnakeRenderPipelineState()->MTLRenderPipelineState {
+    private static func buildBasicRenderPipelineState()->MTLRenderPipelineState {
         let vertexFunction = Engine.DefaultLibrary.makeFunction(name: "basic_vertex_shader")
-        let fragmentFunction = Engine.DefaultLibrary.makeFunction(name: "snake_fragment_shader")
+        let fragmentFunction = Engine.DefaultLibrary.makeFunction(name: "basic_fragment_shader")
         
         let vertexDescriptor = MTLVertexDescriptor()
         

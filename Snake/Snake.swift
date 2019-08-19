@@ -1,7 +1,6 @@
 import MetalKit
 
 class Snake: Node {
-    
     var timePassed: Float = 1
     var shouldUpdate: Bool {
         if(timePassed.truncatingRemainder(dividingBy: floor(60 / GameSettings.SnakeSpeed)) == 0) {
@@ -17,12 +16,11 @@ class Snake: Node {
     public var head: SnakeSection { return self._head}
     private var _nextDirection: float3 = float3(1,0,0)
     private var _turns: [String: float3] = [:]
-    var turnsToRemove: [String] = []
     override init() {
         super.init()
         addSection()
-//        addSection()
-//        addSection()
+        addSection()
+        addSection()
     }
     
     func getTail()->SnakeSection {
@@ -74,7 +72,6 @@ class Snake: Node {
         self._nextDirection = nextDirection
         
         if(head.direction != nextDirection) {
-            _head.setTurn(direction: _nextDirection)
             _turns.updateValue(_nextDirection, forKey: "\(_head.gridPositionString )")
         }
     }
@@ -109,7 +106,7 @@ class Snake: Node {
                         let gridPositionsSection = gridPositions[section.gridPositionString]
                         if(section.id != head.id && gridPositionsHead?.gridPositionString == gridPositionsSection?.gridPositionString){
                             GameSettings.GameState = .GameOver
-                            gridPositions[head.gridPositionString]!.color = float4(1,0,0,1)
+                            gridPositions[head.gridPositionString]!.setColor(float4(1,0,0,1))
                         }
                         
                         gridPositions.updateValue(section, forKey: key)
@@ -122,21 +119,15 @@ class Snake: Node {
 }
 
 class SnakeSection: GameObject {
-    override var renderPipelineStateType: RenderPipelineStateTypes { return .Snake }
     private var scalar: Float = (1 - GameSettings.GridLinesWidth)
     var direction: float3 = float3(1,0,0)
-    var gridPositionX: Int = 0
-    var gridPositionY: Int = 0
-    var color = float4(0.7,0.3,0.7,1)
-    var gridPositionString: String {
-        return "(\(gridPositionX),\(gridPositionY))"
-    }
     
     init(cellX: Int, cellY: Int, direction: float3) {
         super.init(mesh: SquareMesh())
         self.direction = direction
         self.gridPositionX = cellX
         self.gridPositionY = cellY
+        setColor(float4(0.7,0.3,0.7,1))
         setInitialValues(cellX: cellX, cellY: cellY)
     }
     
@@ -167,10 +158,5 @@ class SnakeSection: GameObject {
             if(gridPositionY > Int(GameSettings.GridCellsHigh - 1)) { gridPositionY = 0 }
         }
 
-    }
-    
-    override func render(_ renderCommandEncoder: MTLRenderCommandEncoder) {
-        renderCommandEncoder.setFragmentBytes(&color, length: float4.size, index: 0)
-        super.render(renderCommandEncoder)
     }
 }
