@@ -5,7 +5,7 @@ class InstancedGameObject: Node {
 
     internal var _nodes: [Node] = []
     private var _modelConstantBuffer: MTLBuffer!
-    var renderPipelineStateType: RenderPipelineStateTypes { return  .Intanced }
+    var renderPipelineStateType: RenderPipelineStateTypes { return  .AppleParticle }
 
     
     init(mesh: Mesh, instanceCount: Int) {

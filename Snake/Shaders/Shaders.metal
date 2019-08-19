@@ -142,7 +142,7 @@ vertex RasterizerData instanced_vertex_shader(const Vertex vIn [[ stage_in ]],
     return rd;
 }
 
-fragment half4 basic_fragment_shader(RasterizerData rd [[ stage_in ]],
+fragment half4 apple_particles_fragment_shader(RasterizerData rd [[ stage_in ]],
                                      constant int &elapsedTime [[ buffer(0) ]]) {
     float4 color = float4(1.0,0.0,0.0,1) * (15 / (float)elapsedTime);
     

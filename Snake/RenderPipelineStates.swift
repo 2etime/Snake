@@ -5,7 +5,7 @@ enum RenderPipelineStateTypes {
     case Grid
     case GridBackground
     case Apple
-    case Intanced
+    case AppleParticle
 }
 
 class RenderPipelineStates {
@@ -16,12 +16,12 @@ class RenderPipelineStates {
         _library.updateValue(buildGridRenderPipelineState(), forKey: .Grid)
         _library.updateValue(buildGridBackgroundRenderPipelineState(), forKey: .GridBackground)
         _library.updateValue(buildAppleRenderPipelineState(), forKey: .Apple)
-        _library.updateValue(buildInstancedRenderPipelineState(), forKey: .Intanced)
+        _library.updateValue(buildAppleParticlePipelineState(), forKey: .AppleParticle)
     }
     
-    private static func buildInstancedRenderPipelineState()->MTLRenderPipelineState {
+    private static func buildAppleParticlePipelineState()->MTLRenderPipelineState {
         let vertexFunction = Engine.DefaultLibrary.makeFunction(name: "instanced_vertex_shader")
-        let fragmentFunction = Engine.DefaultLibrary.makeFunction(name: "basic_fragment_shader")
+        let fragmentFunction = Engine.DefaultLibrary.makeFunction(name: "apple_particles_fragment_shader")
         
         let vertexDescriptor = MTLVertexDescriptor()
         
