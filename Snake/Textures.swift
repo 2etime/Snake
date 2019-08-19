@@ -3,6 +3,11 @@ import MetalKit
 enum TextureTypes{
     case None
     case Apple
+    case SnakeHead
+    case SnakeHeadDead
+    case SnakeBody
+    case SnakeTail
+    case SnakeTurn
 }
 
 class Textures {
@@ -10,6 +15,11 @@ class Textures {
     
     public static func Initialize() {
         _library.updateValue(Texture("apple"), forKey: .Apple)
+        _library.updateValue(Texture("SnakeHead"), forKey: .SnakeHead)
+        _library.updateValue(Texture("SnakeHeadDead"), forKey: .SnakeHeadDead)
+        _library.updateValue(Texture("SnakeBody"), forKey: .SnakeBody)
+        _library.updateValue(Texture("SnakeTail"), forKey: .SnakeTail)
+        _library.updateValue(Texture("SnakeTurn"), forKey: .SnakeTurn)
     }
     
     public static func get(_ type: TextureTypes)->MTLTexture {

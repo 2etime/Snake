@@ -18,6 +18,11 @@
 		C602404C2303B48400807C8B /* Math.swift in Sources */ = {isa = PBXBuildFile; fileRef = C602404B2303B48400807C8B /* Math.swift */; };
 		C60240522303B6E100807C8B /* Shaders.metal in Sources */ = {isa = PBXBuildFile; fileRef = C60240512303B6E100807C8B /* Shaders.metal */; };
 		C60240542303B6F100807C8B /* ShaderTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = C60240532303B6F100807C8B /* ShaderTypes.swift */; };
+		C69AD609230B2AC300FD8B82 /* SnakeHead.png in Resources */ = {isa = PBXBuildFile; fileRef = C69AD608230B2AC300FD8B82 /* SnakeHead.png */; };
+		C69AD60D230B2E1600FD8B82 /* SnakeBody.png in Resources */ = {isa = PBXBuildFile; fileRef = C69AD60C230B2E1600FD8B82 /* SnakeBody.png */; };
+		C69AD613230B2FB400FD8B82 /* SnakeTail.png in Resources */ = {isa = PBXBuildFile; fileRef = C69AD612230B2FB400FD8B82 /* SnakeTail.png */; };
+		C69AD615230B329300FD8B82 /* SnakeTurn.png in Resources */ = {isa = PBXBuildFile; fileRef = C69AD614230B329300FD8B82 /* SnakeTurn.png */; };
+		C69AD61D230B359900FD8B82 /* SnakeHeadDead.png in Resources */ = {isa = PBXBuildFile; fileRef = C69AD61C230B359900FD8B82 /* SnakeHeadDead.png */; };
 		C6F03DCF2304D57200FE1A07 /* Snake.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6F03DCE2304D57200FE1A07 /* Snake.swift */; };
 		C6F03DD42304DAA900FE1A07 /* KeyCodes.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6F03DD12304DAA900FE1A07 /* KeyCodes.swift */; };
 		C6F03DD52304DAA900FE1A07 /* Mouse.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6F03DD22304DAA900FE1A07 /* Mouse.swift */; };
@@ -53,6 +58,11 @@
 		C602404B2303B48400807C8B /* Math.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Math.swift; sourceTree = "<group>"; };
 		C60240512303B6E100807C8B /* Shaders.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = Shaders.metal; sourceTree = "<group>"; };
 		C60240532303B6F100807C8B /* ShaderTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShaderTypes.swift; sourceTree = "<group>"; };
+		C69AD608230B2AC300FD8B82 /* SnakeHead.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SnakeHead.png; sourceTree = "<group>"; };
+		C69AD60C230B2E1600FD8B82 /* SnakeBody.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SnakeBody.png; sourceTree = "<group>"; };
+		C69AD612230B2FB400FD8B82 /* SnakeTail.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SnakeTail.png; sourceTree = "<group>"; };
+		C69AD614230B329300FD8B82 /* SnakeTurn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SnakeTurn.png; sourceTree = "<group>"; };
+		C69AD61C230B359900FD8B82 /* SnakeHeadDead.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SnakeHeadDead.png; sourceTree = "<group>"; };
 		C6F03DCE2304D57200FE1A07 /* Snake.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Snake.swift; sourceTree = "<group>"; };
 		C6F03DD12304DAA900FE1A07 /* KeyCodes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyCodes.swift; sourceTree = "<group>"; };
 		C6F03DD22304DAA900FE1A07 /* Mouse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Mouse.swift; sourceTree = "<group>"; };
@@ -173,6 +183,11 @@
 		C6F03DE32305089600FE1A07 /* Res */ = {
 			isa = PBXGroup;
 			children = (
+				C69AD61C230B359900FD8B82 /* SnakeHeadDead.png */,
+				C69AD612230B2FB400FD8B82 /* SnakeTail.png */,
+				C69AD60C230B2E1600FD8B82 /* SnakeBody.png */,
+				C69AD608230B2AC300FD8B82 /* SnakeHead.png */,
+				C69AD614230B329300FD8B82 /* SnakeTurn.png */,
 				C6F03DE4230508AA00FE1A07 /* apple.png */,
 			);
 			path = Res;
@@ -236,8 +251,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C69AD613230B2FB400FD8B82 /* SnakeTail.png in Resources */,
+				C69AD609230B2AC300FD8B82 /* SnakeHead.png in Resources */,
+				C69AD60D230B2E1600FD8B82 /* SnakeBody.png in Resources */,
+				C69AD615230B329300FD8B82 /* SnakeTurn.png in Resources */,
 				C60240372303B0FF00807C8B /* Assets.xcassets in Resources */,
 				C6F03DE5230508AA00FE1A07 /* apple.png in Resources */,
+				C69AD61D230B359900FD8B82 /* SnakeHeadDead.png in Resources */,
 				C602403A2303B0FF00807C8B /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -35,9 +35,13 @@ class Snake: Node {
             self._head = SnakeSection(cellX: Int(_startingPosition.x),
                                       cellY: Int(_startingPosition.y),
                                       direction: _nextDirection)
+            self._head.setTexture(Textures.get(.SnakeHead))
             addChild(self._head)
         } else {
             let tail = getTail()
+            if(tail.id != head.id) {
+                tail.setTexture(Textures.get(.SnakeBody))                
+            }
             let tailDir = ceil(tail.direction)
             var section: SnakeSection!
             if(tailDir.x == 1 && tailDir.y == 0) {
@@ -63,7 +67,7 @@ class Snake: Node {
                                        cellY: tail.gridPositionY - 1,
                                        direction: tail.direction)
             }
-            
+            section.setTexture(Textures.get(.SnakeTail))
             addChild(section)
         }
     }
@@ -106,6 +110,7 @@ class Snake: Node {
                         let gridPositionsSection = gridPositions[section.gridPositionString]
                         if(section.id != head.id && gridPositionsHead?.gridPositionString == gridPositionsSection?.gridPositionString){
                             GameSettings.GameState = .GameOver
+                            head.setTexture(Textures.get(.SnakeHeadDead))
                             gridPositions[head.gridPositionString]!.setColor(float4(1,0,0,1))
                         }
                         
@@ -124,22 +129,30 @@ class SnakeSection: GameObject {
     
     init(cellX: Int, cellY: Int, direction: float3) {
         super.init(mesh: SquareMesh())
-        self.direction = direction
+        setTurn(direction: direction)
         self.gridPositionX = cellX
         self.gridPositionY = cellY
-        setColor(float4(0.7,0.3,0.7,1))
         setInitialValues(cellX: cellX, cellY: cellY)
     }
     
     private func setInitialValues(cellX: Int, cellY: Int) {
-        let scale = scalar * 0.9
+        let scale = scalar
         self.setScale(scale)
-        let screenPosition = Grid.getScreenPosition(cellX: cellX, cellY: cellY) * scalar
+        let screenPosition = Grid.getScreenPosition(cellX: cellX - Int(direction.x), cellY: cellY + Int(direction.y)) * scalar
         self.setPosition(screenPosition)
     }
     
     func setTurn(direction: float3) {
         self.direction = direction
+        if(direction.x == 1) {
+            self.setRotationZ(toRadians(90))
+        } else if(direction.x == -1) {
+            self.setRotationZ(-toRadians(90))
+        } else if(direction.y == 1) {
+            self.setRotationZ(toRadians(180))
+        } else if(direction.y == -1) {
+            self.setRotationZ(toRadians(0))
+        }
     }
     
     func doMove() {
