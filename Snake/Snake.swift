@@ -1,5 +1,19 @@
 import MetalKit
 
+enum TurnTypes {
+    case Straight
+    
+    case From_Left_To_Up
+    case From_Left_To_Down
+    case From_Down_To_Left
+    case From_Up_To_Left
+    
+    case From_Right_To_Up
+    case From_Right_To_Down
+    case From_Down_To_Right
+    case From_Up_To_Right
+}
+
 class Snake: Node {
     var timePassed: Float = 1
     var shouldUpdate: Bool {
@@ -34,7 +48,8 @@ class Snake: Node {
         if(_head == nil) {
             self._head = SnakeSection(cellX: Int(_startingPosition.x),
                                       cellY: Int(_startingPosition.y),
-                                      direction: _nextDirection)
+                                      direction: _nextDirection,
+                                      isHead: true)
             self._head.setTexture(Textures.get(.SnakeHead))
             addChild(self._head)
         } else {
@@ -99,10 +114,12 @@ class Snake: Node {
                         let key = "\(section.gridPositionString)"
                         if(_turns[key] != nil) {
                             let turn  = _turns[key]!
-                            section.setTurn(direction: turn)
+                            section.setTurn(direction: turn, isTail: (i == children.count - 1))
                             if(i == children.count - 1) {
                                 _turns.removeValue(forKey: key)
                             }
+                        }else{
+                            section.setTurn(direction: section.direction, isTail: (i == children.count - 1))
                         }
                         section.doMove()
                         
@@ -126,10 +143,12 @@ class Snake: Node {
 class SnakeSection: GameObject {
     private var scalar: Float = (1 - GameSettings.GridLinesWidth)
     var direction: float3 = float3(1,0,0)
+    private var _isHead: Bool = false
     
-    init(cellX: Int, cellY: Int, direction: float3) {
+    init(cellX: Int, cellY: Int, direction: float3, isHead: Bool = false) {
         super.init(mesh: SquareMesh())
-        setTurn(direction: direction)
+        self._isHead = isHead
+        setTurn(direction: direction, isTail: true)
         self.gridPositionX = cellX
         self.gridPositionY = cellY
         setInitialValues(cellX: cellX, cellY: cellY)
@@ -142,17 +161,72 @@ class SnakeSection: GameObject {
         self.setPosition(screenPosition)
     }
     
-    func setTurn(direction: float3) {
-        self.direction = direction
-        if(direction.x == 1) {
-            self.setRotationZ(toRadians(90))
-        } else if(direction.x == -1) {
-            self.setRotationZ(-toRadians(90))
-        } else if(direction.y == 1) {
-            self.setRotationZ(toRadians(180))
-        } else if(direction.y == -1) {
-            self.setRotationZ(toRadians(0))
+    private func getNextTurnType(currentDirection: float3, turn: float3)->TurnTypes {
+        if(currentDirection.x == 1 && turn.y > 0) {
+            return .From_Left_To_Up
+        } else if(currentDirection.x == 1 && turn.y < 0) {
+            return .From_Left_To_Down
+        }else if(currentDirection.x == -1 && turn.y > 0) {
+            return .From_Right_To_Up
+        } else if(currentDirection.x == -1 && turn.y < 0) {
+            return .From_Right_To_Down
+        }else if(currentDirection.y == 1 && turn.x > 0) {
+            return .From_Down_To_Right
+        } else if(currentDirection.y == 1 && turn.x < 0) {
+            return .From_Down_To_Left
+        } else if(currentDirection.y == -1 && turn.x > 0) {
+            return .From_Up_To_Right
+        } else if(currentDirection.y == -1 && turn.x < 0) {
+            return .From_Up_To_Left
         }
+        return .Straight
+    }
+    
+    
+    
+    func setTurn(direction: float3, isTail: Bool) {
+        var isTurning: Bool = false
+        if(!_isHead && !isTail) {
+            let nextTurnType = getNextTurnType(currentDirection: self.direction, turn: direction)
+            isTurning = nextTurnType != .Straight
+            if(isTurning) {
+                self.setTexture(Textures.get(.SnakeTurn))
+            }else{
+                self.setTexture(Textures.get(.SnakeBody))
+            }
+            
+            switch(nextTurnType) {
+            case .From_Left_To_Down, .From_Down_To_Left:
+                self.setRotationZ(toRadians(90))
+            case .From_Left_To_Up, .From_Up_To_Left:
+                self.setRotationZ(0)
+            case .From_Right_To_Down, .From_Down_To_Right:
+                self.setRotationZ(toRadians(180))
+            case .From_Right_To_Up, .From_Up_To_Right:
+                self.setRotationZ(toRadians(-90))
+            default:
+                break;
+            }
+//            if(nextTurnType == .Straight){
+//
+//            }else if(nextTurnType == .From_Left_To_Down) {
+
+//            }
+        }
+        
+        self.direction = direction
+        if(!isTurning) {
+            if(direction.x == 1) {
+                self.setRotationZ(toRadians(90))
+            } else if(direction.x == -1) {
+                self.setRotationZ(-toRadians(90))
+            } else if(direction.y == 1) {
+                self.setRotationZ(toRadians(180))
+            } else if(direction.y == -1) {
+                self.setRotationZ(toRadians(0))
+            }
+        }
+        
     }
     
     func doMove() {
