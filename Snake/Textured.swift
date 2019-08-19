@@ -1,7 +1,7 @@
 import MetalKit
 
 class Apple: LightObject {
-    override var renderPipelineStateType: RenderPipelineStateTypes { return .Apple }
+    override var renderPipelineStateType: RenderPipelineStateTypes { return .Textured }
     private var _texture: MTLTexture!
     var gridPositionX: Int = 0
     var gridPositionY: Int = 0

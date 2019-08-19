@@ -4,7 +4,7 @@ enum RenderPipelineStateTypes {
     case Snake
     case Grid
     case GridBackground
-    case Apple
+    case Textured
     case AppleParticle
 }
 
@@ -15,7 +15,7 @@ class RenderPipelineStates {
         _library.updateValue(buildSnakeRenderPipelineState(), forKey: .Snake)
         _library.updateValue(buildGridRenderPipelineState(), forKey: .Grid)
         _library.updateValue(buildGridBackgroundRenderPipelineState(), forKey: .GridBackground)
-        _library.updateValue(buildAppleRenderPipelineState(), forKey: .Apple)
+        _library.updateValue(buildTexturedRenderPipelineState(), forKey: .Textured)
         _library.updateValue(buildAppleParticlePipelineState(), forKey: .AppleParticle)
     }
     
@@ -53,9 +53,9 @@ class RenderPipelineStates {
     }
     
     
-    private static func buildAppleRenderPipelineState()->MTLRenderPipelineState {
+    private static func buildTexturedRenderPipelineState()->MTLRenderPipelineState {
         let vertexFunction = Engine.DefaultLibrary.makeFunction(name: "basic_vertex_shader")
-        let fragmentFunction = Engine.DefaultLibrary.makeFunction(name: "apple_fragment_shader")
+        let fragmentFunction = Engine.DefaultLibrary.makeFunction(name: "textured_fragment_shader")
         
         let vertexDescriptor = MTLVertexDescriptor()
         
