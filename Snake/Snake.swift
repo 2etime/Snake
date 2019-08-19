@@ -22,8 +22,8 @@ class Snake: Node {
         super.init()
         
         addSection()
-        addSection()
-        addSection()
+//        addSection()
+//        addSection()
     }
     
     func getTail()->SnakeSection {
@@ -93,7 +93,7 @@ class Snake: Node {
                 if(_head.direction != _nextDirection) {
                     _turns.updateValue(_nextDirection, forKey: "\(_head.gridPositionString )")
                 }
-                
+            
                 for (i, child) in children.enumerated() {
                     if let section = child as? SnakeSection {
                         let key = "\(section.gridPositionString)"
@@ -148,15 +148,20 @@ class SnakeSection: GameObject {
         let scalar = (1 - GameSettings.GridLinesWidth)
         let screenPosition = Grid.getScreenPosition(cellX: gridPositionX, cellY: gridPositionY) * scalar
         self.setPosition(screenPosition)
-        gridPositionX += Int(round(direction.x)) 
+
+        print(gridPositionY)
+        gridPositionX += Int(round(direction.x))
         gridPositionY -= Int(round(direction.y))
         
         if(!GameSettings.SideWallsActive) {
             //Through the wall magic
             if(gridPositionX < 0) { gridPositionX = Int(GameSettings.GridCellsWide - 1) }
             if(gridPositionX > Int(GameSettings.GridCellsWide - 1)) { gridPositionX = 0 }
-            if(gridPositionY < 0) { gridPositionY = Int(GameSettings.GridCellsHigh - 1) }
-            if(gridPositionY > Int(GameSettings.GridCellsHigh - 1)) { gridPositionY = 0 }            
+            if(gridPositionY < 0) {
+                gridPositionY = Int(GameSettings.GridCellsHigh - 1)
+                
+            }
+            if(gridPositionY > Int(GameSettings.GridCellsHigh - 1)) { gridPositionY = 0 }
         }
 
     }

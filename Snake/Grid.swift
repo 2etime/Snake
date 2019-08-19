@@ -32,9 +32,11 @@ class Grid: GameObject {
 
 extension Grid {
     static func getScreenPosition(cellX: Int, cellY: Int)->float3 {
-        let x: Float = (Float(cellX) - (floor(GameSettings.GridCellsWide / 2)))
-        let y: Float = (-Float(cellY) + (floor(GameSettings.GridCellsHigh / 2)))
-        return float3(x, y, 0.0)
+        let offsetX: Float = GameSettings.GridCellsWide.remainder(dividingBy: 2) == 0 ? 0.5 : 0.0
+        let offsetY: Float = GameSettings.GridCellsHigh.remainder(dividingBy: 2) == 0 ? 0.5 : 0.0
+        let x: Float = (Float(cellX) - (floor(GameSettings.GridCellsWide / 2) - offsetX))
+        let y: Float = (-Float(cellY) + (floor(GameSettings.GridCellsHigh / 2) + offsetY))
+        return float3(x, y - (offsetY * 2), 0.0)
     }
 }
 

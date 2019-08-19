@@ -15,12 +15,12 @@ class GameSettings {
     public static var ClearColor: MTLClearColor = ClearColors.DarkGray
     public static var MainPixelFormat: MTLPixelFormat = .bgra8Unorm_srgb
     
-    private static var _gridSize: float2 = float2(41,41)
+    private static var _gridSize: float2 = float2(21,21)
     public static var GridCellsWide: Float { return _gridSize.x }
     public static var GridCellsHigh: Float { return _gridSize.y }
     public static var GridLinesWidth: Float = 0.05
     
-    public static var SnakeSpeed: Float = 1.0
+    public static var SnakeSpeed: Float = 3.0
     public static var GameState: GameStates = .Running
     public static var SideWallsActive: Bool = false
 }
