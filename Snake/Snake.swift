@@ -33,8 +33,8 @@ class Snake: Node {
     override init() {
         super.init()
         addSection()
-        addSection()
-        addSection()
+//        addSection()
+//        addSection()
     }
     
     func getTail()->SnakeSection {
@@ -102,13 +102,13 @@ class Snake: Node {
         if(Keyboard.IsKeyPressed(.space)) {
             addSection()
         }
-        
+//        print(head.gridPositionString)
         if(shouldUpdate) {
             if(GameSettings.GameState != .GameOver) {
                 if(_head.direction != _nextDirection) {
                     _turns.updateValue(_nextDirection, forKey: "\(_head.gridPositionString )")
                 }
-            
+
                 for (i, child) in children.enumerated() {
                     if let section = child as? SnakeSection {
                         let key = "\(section.gridPositionString)"
@@ -122,7 +122,7 @@ class Snake: Node {
                             section.setTurn(direction: section.direction, isTail: (i == children.count - 1))
                         }
                         section.doMove()
-                        
+
                         let gridPositionsHead = gridPositions[head.gridPositionString]
                         let gridPositionsSection = gridPositions[section.gridPositionString]
                         if(section.id != head.id && gridPositionsHead?.gridPositionString == gridPositionsSection?.gridPositionString){
@@ -130,7 +130,7 @@ class Snake: Node {
                             head.setTexture(Textures.get(.SnakeHeadDead))
                             gridPositions[head.gridPositionString]!.setColor(float4(1,0,0,1))
                         }
-                        
+
                         gridPositions.updateValue(section, forKey: key)
                     }
                 }

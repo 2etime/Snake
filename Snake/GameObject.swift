@@ -10,7 +10,7 @@ class GameObject: Node {
         return _texture == nil ? .Basic : .Textured
     }
     var gridPositionString: String {
-        return "(\(gridPositionX),\(gridPositionY))"
+        return "(\(gridPositionX - 1),\(gridPositionY))"
     }
     private var _color: float4 = float4(1,1,1,1)
     
