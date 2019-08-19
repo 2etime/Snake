@@ -85,10 +85,12 @@ class GameScene: Scene {
             }
         }
         
-        if(snake.head.gridPositionString.contains("-1")
-            || snake.head.gridPositionString.contains("\(Int(GameSettings.GridCellsHigh))")
-            || snake.head.gridPositionString.contains("\(Int(GameSettings.GridCellsHigh))")) {
-            GameSettings.GameState = .GameOver
+        if(GameSettings.SideWallsActive) {
+            if(snake.head.gridPositionString.contains("-1")
+                || snake.head.gridPositionString.contains("\(Int(GameSettings.GridCellsHigh))")
+                || snake.head.gridPositionString.contains("\(Int(GameSettings.GridCellsHigh))")) {
+                GameSettings.GameState = .GameOver
+            }            
         }
     }
     

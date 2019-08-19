@@ -152,6 +152,15 @@ class SnakeSection: GameObject {
         self.setPosition(x, y, 0)
         gridPositionX += Int(round(direction.x)) 
         gridPositionY -= Int(round(direction.y))
+        
+        if(!GameSettings.SideWallsActive) {
+            //Through the wall magic
+            if(gridPositionX < 0) { gridPositionX = Int(GameSettings.GridCellsWide - 1) }
+            if(gridPositionX > Int(GameSettings.GridCellsWide - 1)) { gridPositionX = 0 }
+            if(gridPositionY < 0) { gridPositionY = Int(GameSettings.GridCellsHigh - 1) }
+            if(gridPositionY > Int(GameSettings.GridCellsHigh - 1)) { gridPositionY = 0 }            
+        }
+
     }
     
     override func render(_ renderCommandEncoder: MTLRenderCommandEncoder) {
