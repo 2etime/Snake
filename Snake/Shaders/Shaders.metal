@@ -102,7 +102,7 @@ fragment half4 grid_background_fragment_shader(RasterizerData rd [[ stage_in ]],
                                                constant bool &isOver [[ buffer(1) ]]) {
     float4 color;
     if(isOver) {
-        color = float4(1,0,0,1) * max(1 + cos(totalGameTime * 2), 0.1);
+        color = float4(1,0,0,1) * max(cos(totalGameTime * 2), 0.1);
     }else{
         color = abs(float4(rd.textureCoordinate.x,rd.textureCoordinate.y,abs(sin(totalGameTime)), 1.0));
     }

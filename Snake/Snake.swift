@@ -51,6 +51,7 @@ class Snake: Node {
                                       direction: _nextDirection,
                                       isHead: true)
             self._head.setTexture(Textures.get(.SnakeHead))
+            self._head.setScale(1.2)
             addChild(self._head)
         } else {
             let tail = getTail()
@@ -128,7 +129,11 @@ class Snake: Node {
                         if(section.id != head.id && gridPositionsHead?.gridPositionString == gridPositionsSection?.gridPositionString){
                             GameSettings.GameState = .GameOver
                             head.setTexture(Textures.get(.SnakeHeadDead))
-                            gridPositions[head.gridPositionString]!.setColor(float4(1,0,0,1))
+                            if(gridPositions[head.gridPositionString]!.isTurning) {
+                                gridPositions[head.gridPositionString]!.setTexture(Textures.get(.SnakeTurnHit))
+                            }else{
+                                gridPositions[head.gridPositionString]!.setTexture(Textures.get(.SnakeBodyHit))
+                            }
                         }
 
                         gridPositions.updateValue(section, forKey: key)
@@ -144,6 +149,7 @@ class SnakeSection: GameObject {
     private var scalar: Float = (1 - GameSettings.GridLinesWidth)
     var direction: float3 = float3(1,0,0)
     private var _isHead: Bool = false
+    var isTurning: Bool = false
     
     init(cellX: Int, cellY: Int, direction: float3, isHead: Bool = false) {
         super.init(mesh: SquareMesh())
@@ -185,7 +191,7 @@ class SnakeSection: GameObject {
     
     
     func setTurn(direction: float3, isTail: Bool) {
-        var isTurning: Bool = false
+        isTurning = false
         if(!_isHead && !isTail) {
             let nextTurnType = getNextTurnType(currentDirection: self.direction, turn: direction)
             isTurning = nextTurnType != .Straight

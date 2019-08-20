@@ -5,8 +5,11 @@ enum TextureTypes{
     case SnakeHead
     case SnakeHeadDead
     case SnakeBody
+    case SnakeBodyHit
     case SnakeTail
     case SnakeTurn
+    case SnakeTurnHit
+    
     case Apple
     case Apple0
     case Apple1
@@ -22,8 +25,10 @@ class Textures {
         _library.updateValue(Texture("SnakeHead"), forKey: .SnakeHead)
         _library.updateValue(Texture("SnakeHeadDead"), forKey: .SnakeHeadDead)
         _library.updateValue(Texture("SnakeBody"), forKey: .SnakeBody)
+        _library.updateValue(Texture("SnakeBodyHit"), forKey: .SnakeBodyHit)
         _library.updateValue(Texture("SnakeTail"), forKey: .SnakeTail)
         _library.updateValue(Texture("SnakeTurn"), forKey: .SnakeTurn)
+        _library.updateValue(Texture("SnakeTurnHit"), forKey: .SnakeTurnHit)
         
         _library.updateValue(Texture("apple"), forKey: .Apple)
         _library.updateValue(Texture("apple0"), forKey: .Apple0)
