@@ -18,7 +18,7 @@ class Apple: LightObject {
     
     public func moveApple()->String {
         let cellX: Int = Int.random(in: 0..<(Int(GameSettings.GridCellsWide) - 2))
-        let cellY: Int = Int.random(in: 0..<(Int(GameSettings.GridCellsWide) - 2))
+        let cellY: Int = Int.random(in: 0..<(Int(GameSettings.GridCellsHigh) - 2))
         let screenPosition = Grid.getScreenPosition(cellX: cellX, cellY: cellY) * scalar
         self.setPosition(screenPosition)
         

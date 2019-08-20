@@ -33,8 +33,8 @@ class Snake: Node {
     override init() {
         super.init()
         addSection()
-//        addSection()
-//        addSection()
+        addSection()
+        addSection()
     }
     
     func getTail()->SnakeSection {
@@ -102,7 +102,7 @@ class Snake: Node {
         if(Keyboard.IsKeyPressed(.space)) {
             addSection()
         }
-//        print(head.gridPositionString)
+
         if(shouldUpdate) {
             if(GameSettings.GameState != .GameOver) {
                 if(_head.direction != _nextDirection) {

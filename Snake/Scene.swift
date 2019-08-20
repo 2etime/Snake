@@ -11,7 +11,8 @@ class Scene: Node {
 //                                                            height: GameSettings.GridCellsHigh,
 //                                                            near: -1.0, far: 1.0)
         var projectionMatrix = matrix_float4x4.perspective(degreesFov: 90, aspectRatio: 1, near: -0.1, far: 1)
-        projectionMatrix.translate(float3(0,0,-Float(GameSettings.GridCellsWide / 2)))
+        let translate = GameSettings.GridCellsWide > GameSettings.GridCellsHigh ? GameSettings.GridCellsWide : GameSettings.GridCellsHigh
+        projectionMatrix.translate(float3(0,0,-Float(translate / 2)))
         sceneConstants.projectionMatrix = projectionMatrix
         
         buildScene()
