@@ -3,7 +3,9 @@ import MetalKit
 class AppleAteParticles: InstancedGameObject {
     var totalTime: Float = 0.0
     var directions: [float3] = []
-    var particleCount: Int = 40
+    var particleCount: Int = 10
+    var textureArray: TextureArray!
+    var textureSlices: [uint32] = [0,1,2,3,4]
     
     private var _startingPosition: float3 = float3(0,0,0)
     private var _currentAnimationTime: Int = 0
@@ -17,9 +19,16 @@ class AppleAteParticles: InstancedGameObject {
                                                  Float.random(in: -0.5..<0.5))
 
             directions.append(randomDirection)
-            _nodes[i].setScaleX(0.1)
+            _nodes[i].setScale(0.5)
             _nodes[i].rotateZ(Float.random(in: 1..<90))
         }
+        
+        textureArray = TextureArray(arrayLength: 5)
+        textureArray.setSlice(slice: 0, tex: Textures.get(.Apple0))
+        textureArray.setSlice(slice: 1, tex: Textures.get(.Apple1))
+        textureArray.setSlice(slice: 2, tex: Textures.get(.Apple2))
+        textureArray.setSlice(slice: 3, tex: Textures.get(.Apple3))
+        textureArray.setSlice(slice: 4, tex: Textures.get(.Apple4))
     }
     
     func doAnimation(cellX: Int, cellY: Int) {
@@ -33,7 +42,7 @@ class AppleAteParticles: InstancedGameObject {
         totalTime += deltaTime
         if(_doAnimation) {
             for (i, child) in _nodes.enumerated() {
-                child.move(directions[i].x, directions[i].y, 0.0)
+                child.move(directions[i].x * 0.2, directions[i].y * 0.2, 0.0)
                 child.rotateZ(deltaTime)
             }
             self._currentAnimationTime += 1
@@ -61,6 +70,9 @@ class AppleAteParticles: InstancedGameObject {
     override func render(_ renderCommandEncoder: MTLRenderCommandEncoder) {
         if(_doAnimation) {
             renderCommandEncoder.setFragmentBytes(&_currentAnimationTime, length: uint32.size, index: 0)
+            renderCommandEncoder.setFragmentTexture(textureArray.texture, index: 0)
+            renderCommandEncoder.setFragmentSamplerState(SamplerStates.get(.Less), index: 0)
+            renderCommandEncoder.setVertexBytes(&textureSlices, length: uint32.size(5), index: 3)
             super.render(renderCommandEncoder)
         }
     }

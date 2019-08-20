@@ -23,6 +23,11 @@
 		C69AD613230B2FB400FD8B82 /* SnakeTail.png in Resources */ = {isa = PBXBuildFile; fileRef = C69AD612230B2FB400FD8B82 /* SnakeTail.png */; };
 		C69AD615230B329300FD8B82 /* SnakeTurn.png in Resources */ = {isa = PBXBuildFile; fileRef = C69AD614230B329300FD8B82 /* SnakeTurn.png */; };
 		C69AD61D230B359900FD8B82 /* SnakeHeadDead.png in Resources */ = {isa = PBXBuildFile; fileRef = C69AD61C230B359900FD8B82 /* SnakeHeadDead.png */; };
+		C69AD6CB230B918900FD8B82 /* apple4.png in Resources */ = {isa = PBXBuildFile; fileRef = C69AD6C6230B918900FD8B82 /* apple4.png */; };
+		C69AD6CC230B918900FD8B82 /* apple1.png in Resources */ = {isa = PBXBuildFile; fileRef = C69AD6C7230B918900FD8B82 /* apple1.png */; };
+		C69AD6CD230B918900FD8B82 /* apple3.png in Resources */ = {isa = PBXBuildFile; fileRef = C69AD6C8230B918900FD8B82 /* apple3.png */; };
+		C69AD6CE230B918900FD8B82 /* apple0.png in Resources */ = {isa = PBXBuildFile; fileRef = C69AD6C9230B918900FD8B82 /* apple0.png */; };
+		C69AD6CF230B918900FD8B82 /* apple2.png in Resources */ = {isa = PBXBuildFile; fileRef = C69AD6CA230B918900FD8B82 /* apple2.png */; };
 		C6F03DCF2304D57200FE1A07 /* Snake.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6F03DCE2304D57200FE1A07 /* Snake.swift */; };
 		C6F03DD42304DAA900FE1A07 /* KeyCodes.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6F03DD12304DAA900FE1A07 /* KeyCodes.swift */; };
 		C6F03DD52304DAA900FE1A07 /* Mouse.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6F03DD22304DAA900FE1A07 /* Mouse.swift */; };
@@ -63,6 +68,11 @@
 		C69AD612230B2FB400FD8B82 /* SnakeTail.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SnakeTail.png; sourceTree = "<group>"; };
 		C69AD614230B329300FD8B82 /* SnakeTurn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SnakeTurn.png; sourceTree = "<group>"; };
 		C69AD61C230B359900FD8B82 /* SnakeHeadDead.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SnakeHeadDead.png; sourceTree = "<group>"; };
+		C69AD6C6230B918900FD8B82 /* apple4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = apple4.png; path = ../../../../../Desktop/apple4.png; sourceTree = "<group>"; };
+		C69AD6C7230B918900FD8B82 /* apple1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = apple1.png; path = ../../../../../Desktop/apple1.png; sourceTree = "<group>"; };
+		C69AD6C8230B918900FD8B82 /* apple3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = apple3.png; path = ../../../../../Desktop/apple3.png; sourceTree = "<group>"; };
+		C69AD6C9230B918900FD8B82 /* apple0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = apple0.png; path = ../../../../../Desktop/apple0.png; sourceTree = "<group>"; };
+		C69AD6CA230B918900FD8B82 /* apple2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = apple2.png; path = ../../../../../Desktop/apple2.png; sourceTree = "<group>"; };
 		C6F03DCE2304D57200FE1A07 /* Snake.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Snake.swift; sourceTree = "<group>"; };
 		C6F03DD12304DAA900FE1A07 /* KeyCodes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyCodes.swift; sourceTree = "<group>"; };
 		C6F03DD22304DAA900FE1A07 /* Mouse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Mouse.swift; sourceTree = "<group>"; };
@@ -189,6 +199,11 @@
 				C69AD608230B2AC300FD8B82 /* SnakeHead.png */,
 				C69AD614230B329300FD8B82 /* SnakeTurn.png */,
 				C6F03DE4230508AA00FE1A07 /* apple.png */,
+				C69AD6C9230B918900FD8B82 /* apple0.png */,
+				C69AD6C7230B918900FD8B82 /* apple1.png */,
+				C69AD6CA230B918900FD8B82 /* apple2.png */,
+				C69AD6C8230B918900FD8B82 /* apple3.png */,
+				C69AD6C6230B918900FD8B82 /* apple4.png */,
 			);
 			path = Res;
 			sourceTree = "<group>";
@@ -252,13 +267,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				C69AD613230B2FB400FD8B82 /* SnakeTail.png in Resources */,
+				C69AD6CB230B918900FD8B82 /* apple4.png in Resources */,
 				C69AD609230B2AC300FD8B82 /* SnakeHead.png in Resources */,
 				C69AD60D230B2E1600FD8B82 /* SnakeBody.png in Resources */,
+				C69AD6CD230B918900FD8B82 /* apple3.png in Resources */,
 				C69AD615230B329300FD8B82 /* SnakeTurn.png in Resources */,
 				C60240372303B0FF00807C8B /* Assets.xcassets in Resources */,
 				C6F03DE5230508AA00FE1A07 /* apple.png in Resources */,
 				C69AD61D230B359900FD8B82 /* SnakeHeadDead.png in Resources */,
+				C69AD6CF230B918900FD8B82 /* apple2.png in Resources */,
+				C69AD6CC230B918900FD8B82 /* apple1.png in Resources */,
 				C602403A2303B0FF00807C8B /* Main.storyboard in Resources */,
+				C69AD6CE230B918900FD8B82 /* apple0.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

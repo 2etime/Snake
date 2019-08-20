@@ -10,6 +10,7 @@ struct RasterizerData {
     float4 position [[ position ]];
     float2 textureCoordinate;
     float3 worldPosition;
+    int slice;
 };
 
 struct SceneConstants {
@@ -31,8 +32,8 @@ struct LightData {
 };
 
 vertex RasterizerData basic_vertex_shader(Vertex vIn [[ stage_in ]],
-                                         constant SceneConstants &sceneConstants [[ buffer(1) ]],
-                                         constant ModelConstants &modelConstants [[ buffer(2) ]]) {
+                                          constant SceneConstants &sceneConstants [[ buffer(1) ]],
+                                          constant ModelConstants &modelConstants [[ buffer(2) ]]) {
     RasterizerData rd;
     
     float4 worldPosition = modelConstants.modelMatrix * float4(vIn.position, 1.0);
@@ -68,7 +69,7 @@ fragment half4 grid_fragment_shader(RasterizerData rd [[ stage_in ]],
                                     constant GridConstants &gridConstants [[ buffer(1) ]],
                                     constant int &lightCount [[ buffer(2) ]],
                                     constant LightData *lightDatas [[ buffer(3) ]]) {
-
+    
     float2 texCoord = rd.textureCoordinate;
     
     float2 cellCounts = float2(gridConstants.cellsWide,gridConstants.cellsHigh);
@@ -97,8 +98,8 @@ fragment half4 grid_fragment_shader(RasterizerData rd [[ stage_in ]],
 }
 
 fragment half4 grid_background_fragment_shader(RasterizerData rd [[ stage_in ]],
-                                    constant float &totalGameTime [[ buffer(0) ]],
-                                    constant bool &isOver [[ buffer(1) ]]) {
+                                               constant float &totalGameTime [[ buffer(0) ]],
+                                               constant bool &isOver [[ buffer(1) ]]) {
     float4 color;
     if(isOver) {
         color = float4(1,0,0,1) * max(1 + cos(totalGameTime * 2), 0.1);
@@ -128,6 +129,7 @@ fragment half4 textured_fragment_shader(RasterizerData rd [[ stage_in ]],
 vertex RasterizerData instanced_vertex_shader(const Vertex vIn [[ stage_in ]],
                                               constant SceneConstants &sceneConstants [[ buffer(1) ]],
                                               constant ModelConstants *modelConstants [[ buffer(2) ]],
+                                              constant int *slices [[ buffer(3) ]],
                                               uint instanceId [[ instance_id ]]){
     RasterizerData rd;
     
@@ -137,15 +139,23 @@ vertex RasterizerData instanced_vertex_shader(const Vertex vIn [[ stage_in ]],
     rd.position = sceneConstants.projectionMatrix * worldPosition;
     rd.textureCoordinate = vIn.textureCoordinate;
     rd.worldPosition = worldPosition.xyz;
+    rd.slice = slices[instanceId];
     
     return rd;
 }
 
 fragment half4 apple_particles_fragment_shader(RasterizerData rd [[ stage_in ]],
-                                     constant int &elapsedTime [[ buffer(0) ]]) {
-    float4 color = float4(1.0,0.0,0.0,1) * (15 / (float)elapsedTime);
+                                               constant int &elapsedTime [[ buffer(0) ]],
+                                               texture2d_array<float> texture [[ texture(0) ]],
+                                               sampler sampler2d [[ sampler(0) ]]) {
+    float alpha = (15 / (float)elapsedTime);
     
-    return half4(color.r, color.g, color.b, color.a);
+    float4 color = texture.sample(sampler2d, rd.textureCoordinate, rd.slice);
+    if(color.a <= 0.01) {
+        discard_fragment();
+    }
+    
+    return half4(color.r, color.g, color.b, color.a) * alpha;
 }
 
 
