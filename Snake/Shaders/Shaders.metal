@@ -37,6 +37,7 @@ vertex RasterizerData basic_vertex_shader(Vertex vIn [[ stage_in ]],
     RasterizerData rd;
     
     float4 worldPosition = modelConstants.modelMatrix * float4(vIn.position, 1.0);
+    
     rd.position = sceneConstants.projectionMatrix * worldPosition;
     rd.textureCoordinate = vIn.textureCoordinate;
     rd.worldPosition = worldPosition.xyz;
@@ -74,7 +75,7 @@ fragment half4 grid_fragment_shader(RasterizerData rd [[ stage_in ]],
     
     float2 cellCounts = float2(gridConstants.cellsWide,gridConstants.cellsHigh);
     float lineWidth = 0.04;
-    float4 gridColor = float4(1,0,1,1);
+    float4 gridColor = abs(float4(rd.textureCoordinate.x,rd.textureCoordinate.y,abs(sin(1.0)), 1.0));
     float4 backgroundColor = float4(0.02,0.02,0.02,1);
     float4 color = grid(cellCounts,
                         lineWidth,

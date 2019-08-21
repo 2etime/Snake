@@ -16,7 +16,7 @@ class GameScene: Scene {
         self.gridLines = GridLines()
         addChild(gridLines)
         addSnake()
-        addApple(count: 2)
+        addApple(count: 10)
      
         addAppleParticles()
     }
@@ -71,7 +71,7 @@ class GameScene: Scene {
     var totalTime: Float = 0.0
     override func doUpdate(deltaTime: Float) {
         totalTime += deltaTime
-        
+
         checkInput()
         for apple in apples {
             if(snake.head.gridPositionString == apple.gridPositionString){

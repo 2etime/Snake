@@ -14,6 +14,7 @@ class Grid: GameObject {
     
     override func doUpdate(deltaTime: Float) {
         _totalTime += deltaTime
+
     }
     
     override func render(_ renderCommandEncoder: MTLRenderCommandEncoder) {

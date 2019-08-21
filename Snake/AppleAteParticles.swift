@@ -42,7 +42,7 @@ class AppleAteParticles: InstancedGameObject {
         totalTime += deltaTime
         if(_doAnimation) {
             for (i, child) in _nodes.enumerated() {
-                child.move(directions[i].x * 0.2, directions[i].y * 0.2, 0.0)
+                child.move(directions[i].x * 0.2, directions[i].y * 0.2, directions[i].z * 0.2)
                 child.rotateZ(deltaTime)
             }
             self._currentAnimationTime += 1
